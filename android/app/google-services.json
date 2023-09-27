@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "344729548108",
+    "firebase_url": "https://awiiapp-ed1bc-default-rtdb.firebaseio.com",
+    "project_id": "awiiapp-ed1bc",
+    "storage_bucket": "awiiapp-ed1bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344729548108:android:ee945ad53a98ffb77d4be9",
+        "android_client_info": {
+          "package_name": "com.awiiapp.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344729548108-ap15n2arige260g8fvjfd5hddn4mca54.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.awiiapp.android",
+            "certificate_hash": "e95916dd988c31a5fdb0359a4d697408119fc25f"
+          }
+        },
+        {
+          "client_id": "344729548108-kblftd3oi18bai42pqpgl5vbo4ib4mkn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYC3lT5ukvJeG-Z75BWmS1hLACH0wwTWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344729548108-kblftd3oi18bai42pqpgl5vbo4ib4mkn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
