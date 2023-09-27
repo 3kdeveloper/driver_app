@@ -10,7 +10,6 @@ import 'package:awii/pages/NavigatorPages/intro_screen.dart';
 import 'package:awii/pages/loadingPage/loading.dart';
 import 'package:awii/pages/onTripPage/booking_confirmation.dart';
 import 'package:awii/pages/onTripPage/invoice.dart';
-import 'package:awii/pages/language/languages.dart';
 import 'package:awii/pages/login/login.dart';
 import 'package:awii/pages/onTripPage/map_page.dart';
 import 'package:awii/pages/noInternet/nointernet.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../styles/styles.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 //button style
 

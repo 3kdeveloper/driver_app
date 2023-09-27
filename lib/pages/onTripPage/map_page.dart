@@ -82,7 +82,7 @@ class _MapsState extends State<Maps>
 
   Stream<List<Marker>> get carMarkerStream => _mapMarkerSC.stream;
 
-  LocationData? _locationData;
+  LocationData? locationData;
 
   void _onMapCreated(GoogleMapController controller) {
     setState(() {
@@ -180,7 +180,7 @@ class _MapsState extends State<Maps>
     }
 
     location.onLocationChanged.listen((event) {
-      _locationData = event;
+      locationData = event;
       Marker mark = Marker(
           markerId: const MarkerId('myLocationBg'),
           position: LatLng(event.latitude!, event.longitude!),
