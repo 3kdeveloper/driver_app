@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
@@ -25,7 +20,6 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context, true);
@@ -52,27 +46,27 @@ class _ChatPageState extends State<ChatPage> {
                     children: [
                       Container(
                         padding: EdgeInsets.fromLTRB(
-                            media.width * 0.05,
+                            context.w * 0.05,
                             MediaQuery.of(context).padding.top +
-                                media.width * 0.05,
-                            media.width * 0.05,
-                            media.width * 0.05),
-                        height: media.height * 1,
-                        width: media.width * 1,
+                                context.w * 0.05,
+                            context.w * 0.05,
+                            context.w * 0.05),
+                        height: context.h * 1,
+                        width: context.w * 1,
                         color: page,
                         child: Column(
                           children: [
                             Stack(
                               children: [
                                 Container(
-                                  width: media.width * 0.9,
-                                  height: media.width * 0.1,
+                                  width: context.w * 0.9,
+                                  height: context.w * 0.1,
                                   alignment: Alignment.center,
                                   child: Text(
                                     languages[choosenLanguage]
                                         ['text_chatwithdriver'],
                                     style: GoogleFonts.roboto(
-                                        fontSize: media.width * twenty,
+                                        fontSize: context.w * twenty,
                                         color: textColor,
                                         fontWeight: FontWeight.w600),
                                   ),
@@ -83,8 +77,8 @@ class _ChatPageState extends State<ChatPage> {
                                       Navigator.pop(context, true);
                                     },
                                     child: Container(
-                                      height: media.width * 0.1,
-                                      width: media.width * 0.1,
+                                      height: context.w * 0.1,
+                                      width: context.w * 0.1,
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           boxShadow: [
@@ -113,8 +107,8 @@ class _ChatPageState extends State<ChatPage> {
                                           i,
                                           Container(
                                             padding: EdgeInsets.only(
-                                                top: media.width * 0.025),
-                                            width: media.width * 0.9,
+                                                top: context.w * 0.025),
+                                            width: context.w * 0.9,
                                             alignment:
                                                 (chatList[i]['from_type'] == 1)
                                                     ? Alignment.centerRight
@@ -127,12 +121,12 @@ class _ChatPageState extends State<ChatPage> {
                                                   : CrossAxisAlignment.start,
                                               children: [
                                                 Container(
-                                                  width: media.width * 0.4,
+                                                  width: context.w * 0.4,
                                                   padding: EdgeInsets.fromLTRB(
-                                                      media.width * 0.04,
-                                                      media.width * 0.02,
-                                                      media.width * 0.04,
-                                                      media.width * 0.02),
+                                                      context.w * 0.04,
+                                                      context.w * 0.02,
+                                                      context.w * 0.04,
+                                                      context.w * 0.02),
                                                   decoration: BoxDecoration(
                                                       borderRadius: (chatList[i]['from_type'] == 1)
                                                           ? const BorderRadius.only(
@@ -158,13 +152,13 @@ class _ChatPageState extends State<ChatPage> {
                                                   child: Text(
                                                     chatList[i]['message'],
                                                     style: GoogleFonts.roboto(
-                                                        fontSize: media.width *
+                                                        fontSize: context.w *
                                                             fourteen,
                                                         color: Colors.white),
                                                   ),
                                                 ),
                                                 SizedBox(
-                                                  height: media.width * 0.015,
+                                                  height: context.w * 0.015,
                                                 ),
                                                 Text(chatList[i]
                                                     ['converted_created_at'])
@@ -179,13 +173,13 @@ class _ChatPageState extends State<ChatPage> {
 
                             //text field
                             Container(
-                              margin: EdgeInsets.only(top: media.width * 0.025),
+                              margin: EdgeInsets.only(top: context.w * 0.025),
                               padding: EdgeInsets.fromLTRB(
-                                  media.width * 0.025,
-                                  media.width * 0.01,
-                                  media.width * 0.025,
-                                  media.width * 0.01),
-                              width: media.width * 0.9,
+                                  context.w * 0.025,
+                                  context.w * 0.01,
+                                  context.w * 0.025,
+                                  context.w * 0.01),
+                              width: context.w * 0.9,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
                                   border: Border.all(
@@ -196,7 +190,7 @@ class _ChatPageState extends State<ChatPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   SizedBox(
-                                    width: media.width * 0.7,
+                                    width: context.w * 0.7,
                                     child: TextField(
                                       controller: chatText,
                                       decoration: InputDecoration(
@@ -204,7 +198,7 @@ class _ChatPageState extends State<ChatPage> {
                                           hintText: languages[choosenLanguage]
                                               ['text_entermessage'],
                                           hintStyle: GoogleFonts.roboto(
-                                              fontSize: media.width * twelve,
+                                              fontSize: context.w * twelve,
                                               color: hintColor)),
                                       minLines: 1,
                                       maxLines: 4,
@@ -227,7 +221,7 @@ class _ChatPageState extends State<ChatPage> {
                                     child: Image.asset(
                                       'assets/images/send.png',
                                       fit: BoxFit.contain,
-                                      width: media.width * 0.075,
+                                      width: context.w * 0.075,
                                     ),
                                   )
                                 ],

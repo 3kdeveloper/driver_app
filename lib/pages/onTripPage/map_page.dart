@@ -151,9 +151,9 @@ class _MapsState extends State<Maps>
   }
 
   getCurrentLoc() async {
-    Location location = new Location();
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
+    Location location = Location();
+    bool serviceEnabled;
+    PermissionStatus permissionGranted;
 
     final Uint8List markerIcon2 =
     await getBytesFromAsset('assets/images/my_loc.png', 200);
@@ -163,18 +163,18 @@ class _MapsState extends State<Maps>
     await getBytesFromAsset('assets/images/my_loc_main.png', 200);
     var myLocIconMain = BitmapDescriptor.fromBytes(markerIconMain);
 
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
+    serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
         return;
       }
     }
 
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
+    permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
         return;
       }
     }
@@ -1121,7 +1121,7 @@ class _MapsState extends State<Maps>
                                       20 + media.width * 0.36,
                                       child: SizedBox(
                                         width: media.width * 0.9,
-                                        child: Row(
+                                        child: const Row(
                                           mainAxisAlignment:
                                           MainAxisAlignment
                                               .spaceBetween,
@@ -1201,7 +1201,7 @@ class _MapsState extends State<Maps>
                                         ),
                                         const SizedBox(height: 10),
                                         Container(
-                                            padding: EdgeInsets.only(left: 16,
+                                            padding: const EdgeInsets.only(left: 16,
                                                 top: 16,
                                                 bottom: 16,
                                                 right: 16),
@@ -2967,7 +2967,7 @@ class _MapsState extends State<Maps>
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                        const Login()),
+                                                        const LoginScreen()),
                                                         (route) => false);
                                                 userDetails.clear();
                                               });
@@ -3060,7 +3060,7 @@ class _MapsState extends State<Maps>
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                        const Login()),
+                                                        const LoginScreen()),
                                                         (route) => false);
                                                 userDetails.clear();
                                               });

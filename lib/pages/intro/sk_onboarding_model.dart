@@ -4,7 +4,7 @@ class SkOnboardingModel {
   String title;
   String description;
   Color titleColor;
-  Color descripColor;
+  Color descriptionColor;
   String imagePath;
 
   SkOnboardingModel({
@@ -12,6 +12,6 @@ class SkOnboardingModel {
     required this.description,
     required this.imagePath,
     required this.titleColor,
-    required this.descripColor,
+    required this.descriptionColor,
   });
 }

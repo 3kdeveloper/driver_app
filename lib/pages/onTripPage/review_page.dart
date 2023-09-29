@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/onTripPage/map_page.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class Review extends StatefulWidget {
   const Review({Key? key}) : super(key: key);
@@ -35,7 +29,6 @@ class _ReviewState extends State<Review> {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Material(
       child: Directionality(
         textDirection: (languageDirection == 'rtl')
@@ -44,16 +37,16 @@ class _ReviewState extends State<Review> {
         child: Stack(
           children: [
             Container(
-              height: media.height * 1,
-              width: media.width * 1,
-              padding: EdgeInsets.all(media.width * 0.05),
+              height: context.h * 1,
+              width: context.w * 1,
+              padding: EdgeInsets.all(context.w * 0.05),
               color: page,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: media.width * 0.25,
-                    width: media.width * 0.25,
+                    height: context.w * 0.25,
+                    width: context.w * 0.25,
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
@@ -62,15 +55,15 @@ class _ReviewState extends State<Review> {
                             fit: BoxFit.cover)),
                   ),
                   SizedBox(
-                    height: media.height * 0.02,
+                    height: context.h * 0.02,
                   ),
                   Text(
                     userRequestData['driverDetail']['data']['name'],
                     style: TextStyle(
-                        fontSize: media.width * twenty, color: textColor),
+                        fontSize: context.w * twenty, color: textColor),
                   ),
                   SizedBox(
-                    height: media.height * 0.02,
+                    height: context.h * 0.02,
                   ),
                   //stars
                   Row(
@@ -84,11 +77,11 @@ class _ReviewState extends State<Review> {
                           },
                           child: Icon(
                             Icons.star,
-                            size: media.width * 0.1,
+                            size: context.w * 0.1,
                             color: (review >= 1) ? buttonColor : Colors.grey,
                           )),
                       SizedBox(
-                        width: media.width * 0.02,
+                        width: context.w * 0.02,
                       ),
                       InkWell(
                           onTap: () {
@@ -98,11 +91,11 @@ class _ReviewState extends State<Review> {
                           },
                           child: Icon(
                             Icons.star,
-                            size: media.width * 0.1,
+                            size: context.w * 0.1,
                             color: (review >= 2) ? buttonColor : Colors.grey,
                           )),
                       SizedBox(
-                        width: media.width * 0.02,
+                        width: context.w * 0.02,
                       ),
                       InkWell(
                           onTap: () {
@@ -112,11 +105,11 @@ class _ReviewState extends State<Review> {
                           },
                           child: Icon(
                             Icons.star,
-                            size: media.width * 0.1,
+                            size: context.w * 0.1,
                             color: (review >= 3) ? buttonColor : Colors.grey,
                           )),
                       SizedBox(
-                        width: media.width * 0.02,
+                        width: context.w * 0.02,
                       ),
                       InkWell(
                           onTap: () {
@@ -126,11 +119,11 @@ class _ReviewState extends State<Review> {
                           },
                           child: Icon(
                             Icons.star,
-                            size: media.width * 0.1,
+                            size: context.w * 0.1,
                             color: (review >= 4) ? buttonColor : Colors.grey,
                           )),
                       SizedBox(
-                        width: media.width * 0.02,
+                        width: context.w * 0.02,
                       ),
                       InkWell(
                           onTap: () {
@@ -140,18 +133,18 @@ class _ReviewState extends State<Review> {
                           },
                           child: Icon(
                             Icons.star,
-                            size: media.width * 0.1,
+                            size: context.w * 0.1,
                             color: (review == 5) ? buttonColor : Colors.grey,
                           ))
                     ],
                   ),
                   SizedBox(
-                    height: media.height * 0.05,
+                    height: context.h * 0.05,
                   ),
                   //feedback text
                   Container(
-                    padding: EdgeInsets.all(media.width * 0.05),
-                    width: media.width * 0.9,
+                    padding: EdgeInsets.all(context.w * 0.05),
+                    width: context.w * 0.9,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(width: 1.5, color: Colors.grey)),
@@ -168,7 +161,7 @@ class _ReviewState extends State<Review> {
                     ),
                   ),
                   SizedBox(
-                    height: media.height * 0.05,
+                    height: context.h * 0.05,
                   ),
                   Button(
                       onTap: () async {

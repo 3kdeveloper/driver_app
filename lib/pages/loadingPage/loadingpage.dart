@@ -1,21 +1,4 @@
-import 'dart:async';
-import 'dart:convert';
-
-import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:awii/pages/NavigatorPages/intro_screen.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/onTripPage/booking_confirmation.dart';
-import 'package:awii/pages/onTripPage/invoice.dart';
-import 'package:awii/pages/login/login.dart';
-import 'package:awii/pages/onTripPage/map_page.dart';
-import 'package:awii/pages/noInternet/nointernet.dart';
-import 'package:awii/widgets/widgets.dart';
-import '../../styles/styles.dart';
-import '../../functions/functions.dart';
+import 'package:awii/core/constants/exports.dart';
 import 'package:http/http.dart' as http;
 
 class LoadingPage extends StatefulWidget {
@@ -30,25 +13,128 @@ dynamic package;
 class _LoadingPageState extends State<LoadingPage> {
   String dot = '.';
   bool updateAvailable = false;
-
   dynamic _version;
   bool _isLoading = false;
 
   @override
   void initState() {
     getLanguageDone();
-
     super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: Scaffold(
+        backgroundColor: ColorsResource.primaryColor,
+        body: Stack(
+          children: [
+            SizedBox(
+              height: context.h,
+              width: context.w,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(context.w * 0.01),
+                    width: context.w * 0.55,
+                    height: context.w * 0.55,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        image: const DecorationImage(
+                            image: AssetImage(ImagesResource.splashLogo),
+                            fit: BoxFit.contain)),
+                  ),
+                ],
+              ),
+            ),
+
+            //update available
+
+            (updateAvailable == true)
+                ? Positioned(
+                    top: 0,
+                    child: Container(
+                      height: context.h,
+                      width: context.w,
+                      color: Colors.transparent.withOpacity(0.6),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              width: context.w * 0.9,
+                              padding: EdgeInsets.all(context.w * 0.05),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12)),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                      width: context.w * 0.8,
+                                      child: Text(
+                                        'New version of this app is available in store, please update the app for continue using',
+                                        style: GoogleFonts.roboto(
+                                            fontSize: context.w * sixteen,
+                                            fontWeight: FontWeight.w600),
+                                      )),
+                                  SizedBox(height: context.w * 0.05),
+                                  Button(
+                                      onTap: () async {
+                                        if (platform ==
+                                            TargetPlatform.android) {
+                                          openBrowser(
+                                              'https://play.google.com/store/apps/details?id=${package.packageName}');
+                                        } else {
+                                          setState(() {
+                                            _isLoading = true;
+                                          });
+                                          var response = await http.get(Uri.parse(
+                                              'http://itunes.apple.com/lookup?bundleId=${package.packageName}'));
+                                          if (response.statusCode == 200) {
+                                            openBrowser(jsonDecode(
+                                                    response.body)['results'][0]
+                                                ['trackViewUrl']);
+
+                                            // printWrapped(jsonDecode(response.body)['results'][0]['trackViewUrl']);
+                                          }
+                                          setState(() => _isLoading = false);
+                                        }
+                                      },
+                                      text: 'Update')
+                                ],
+                              ))
+                        ],
+                      ),
+                    ))
+                : const SizedBox.shrink(),
+
+            //loader
+            (_isLoading == true && internet == true)
+                ? const Positioned(top: 0, child: Loading())
+                : const SizedBox.shrink(),
+
+            //no internet
+            (internet == false)
+                ? Positioned(
+                    top: 0,
+                    child: NoInternet(
+                      onTap: () => setState(() {
+                        internetTrue();
+                        getLanguageDone();
+                      }),
+                    ))
+                : const SizedBox.shrink(),
+          ],
+        ),
+      ),
+    );
   }
 
   //navigate
   navigate() {
     if (userRequestData.isNotEmpty && userRequestData['is_completed'] == 1) {
       //invoice page of ride
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const Invoice()),
-          (route) => false);
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil(RouteNames.invoiceScreen, (route) => false);
     } else if (userRequestData.isNotEmpty &&
         userRequestData['is_completed'] != 1) {
       //searching ride page
@@ -56,9 +142,7 @@ class _LoadingPageState extends State<LoadingPage> {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-                builder: (context) => BookingConfirmation(
-                      type: 1,
-                    )),
+                builder: (context) => BookingConfirmation(type: 1)),
             (route) => false);
       } else {
         Navigator.pushAndRemoveUntil(
@@ -77,6 +161,7 @@ class _LoadingPageState extends State<LoadingPage> {
 
 //get language json and data saved in local (bearer token , choosen language) and find users current status
   getLanguageDone() async {
+    //TODO First show the permission dialogue to the user
     await AwesomeNotifications()
         .isNotificationAllowed()
         .then((isAllowed) async {
@@ -87,9 +172,7 @@ class _LoadingPageState extends State<LoadingPage> {
         await AwesomeNotifications().requestPermissionToSendNotifications();
       }
     });
-
     package = await PackageInfo.fromPlatform();
-
     if (platform == TargetPlatform.android) {
       _version = await FirebaseDatabase.instance
           .ref()
@@ -134,145 +217,22 @@ class _LoadingPageState extends State<LoadingPage> {
       await getDetailsOfDevice();
       if (internet == true) {
         var val = await getLocalData();
-
         if (val == '3') {
           navigate();
         } else if (val == '2') {
-          Future.delayed(const Duration(seconds: 2), () {
-            //login page
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const Login()));
-          });
+          Future.delayed(
+              Duration.zero,
+              () => Navigator.pushReplacementNamed(
+                  context, RouteNames.loginScreen));
         } else {
-          Future.delayed(const Duration(seconds: 2), () {
-            //choose language page
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const IntroScreen()));
-          });
+          Future.delayed(
+              Duration.zero,
+              () => Navigator.pushReplacementNamed(
+                  context, RouteNames.introScreen));
         }
       } else {
         setState(() {});
       }
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
-
-    return Material(
-      child: Scaffold(
-        body: Stack(
-          children: [
-            Container(
-              height: media.height * 1,
-              width: media.width * 1,
-              decoration: BoxDecoration(
-                color: page,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(media.width * 0.01),
-                    width: media.width * 0.55,
-                    height: media.width * 0.55,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        image: const DecorationImage(
-                            image: AssetImage('assets/images/splash_logo.png'),
-                            fit: BoxFit.contain)),
-                  ),
-                ],
-              ),
-            ),
-
-            //update available
-
-            (updateAvailable == true)
-                ? Positioned(
-                    top: 0,
-                    child: Container(
-                      height: media.height * 1,
-                      width: media.width * 1,
-                      color: Colors.transparent.withOpacity(0.6),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                              width: media.width * 0.9,
-                              padding: EdgeInsets.all(media.width * 0.05),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: page,
-                              ),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                      width: media.width * 0.8,
-                                      child: Text(
-                                        'New version of this app is available in store, please update the app for continue using',
-                                        style: GoogleFonts.roboto(
-                                            fontSize: media.width * sixteen,
-                                            fontWeight: FontWeight.w600),
-                                      )),
-                                  SizedBox(
-                                    height: media.width * 0.05,
-                                  ),
-                                  Button(
-                                      onTap: () async {
-                                        if (platform ==
-                                            TargetPlatform.android) {
-                                          openBrowser(
-                                              'https://play.google.com/store/apps/details?id=${package.packageName}');
-                                        } else {
-                                          setState(() {
-                                            _isLoading = true;
-                                          });
-                                          var response = await http.get(Uri.parse(
-                                              'http://itunes.apple.com/lookup?bundleId=${package.packageName}'));
-                                          if (response.statusCode == 200) {
-                                            openBrowser(jsonDecode(
-                                                    response.body)['results'][0]
-                                                ['trackViewUrl']);
-
-                                            // printWrapped(jsonDecode(response.body)['results'][0]['trackViewUrl']);
-                                          }
-
-                                          setState(() {
-                                            _isLoading = false;
-                                          });
-                                        }
-                                      },
-                                      text: 'Update')
-                                ],
-                              ))
-                        ],
-                      ),
-                    ))
-                : Container(),
-
-            //loader
-            (_isLoading == true && internet == true)
-                ? const Positioned(top: 0, child: Loading())
-                : Container(),
-
-            //no internet
-            (internet == false)
-                ? Positioned(
-                    top: 0,
-                    child: NoInternet(
-                      onTap: () {
-                        setState(() {
-                          internetTrue();
-                          getLanguageDone();
-                        });
-                      },
-                    ))
-                : Container(),
-          ],
-        ),
-      ),
-    );
   }
 }

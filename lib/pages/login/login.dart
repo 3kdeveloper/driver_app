@@ -8,18 +8,18 @@ import '../../styles/styles.dart';
 import '../../functions/functions.dart';
 import '../../widgets/widgets.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 //code as int for getting phone dial code of choosen country
 String phnumber = ''; // phone number as string entered in input field
 // String phone = '';
 
-class _LoginState extends State<Login> {
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController controller = TextEditingController();
 
   bool terms = true; //terms and conditions true or false
@@ -53,7 +53,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.of(context).size;
-
     return Material(
       child: Directionality(
         textDirection: (languageDirection == 'rtl')
@@ -81,9 +80,7 @@ class _LoginState extends State<Login> {
                             child: Image.asset('assets/images/login_bg.jpg'),
                           ),
                         ),
-                        const SizedBox(
-                          height: 16,
-                        ),
+                        const SizedBox(height: 16),
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
@@ -320,9 +317,7 @@ class _LoginState extends State<Login> {
                                                         media.width * sixteen,
                                                     color: textColor),
                                               ),
-                                              const SizedBox(
-                                                width: 2,
-                                              ),
+                                              const SizedBox(width: 2),
                                               const Icon(
                                                   Icons.keyboard_arrow_down)
                                             ],
@@ -380,15 +375,13 @@ class _LoginState extends State<Login> {
                                 Row(
                                   children: [
                                     InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          if (terms == true) {
-                                            terms = false;
-                                          } else {
-                                            terms = true;
-                                          }
-                                        });
-                                      },
+                                      onTap: () => setState(() {
+                                        if (terms == true) {
+                                          terms = false;
+                                        } else {
+                                          terms = true;
+                                        }
+                                      }),
                                       child: Container(
                                           height: media.width * 0.08,
                                           width: media.width * 0.08,
@@ -402,9 +395,7 @@ class _LoginState extends State<Login> {
                                           child: const Icon(Icons.done,
                                               color: Colors.white)),
                                     ),
-                                    SizedBox(
-                                      width: media.width * 0.03,
-                                    ),
+                                    SizedBox(width: media.width * 0.03),
 
                                     //terms and condition and privacy policy url
                                     SizedBox(
@@ -463,9 +454,7 @@ class _LoginState extends State<Login> {
                                     )
                                   ],
                                 ),
-                                SizedBox(
-                                  height: media.height * 0.1,
-                                ),
+                                SizedBox(height: media.height * 0.1),
                                 Container(
                                   width: media.width * 1 - media.width * 0.08,
                                   alignment: Alignment.center,
@@ -523,26 +512,24 @@ class _LoginState extends State<Login> {
                 : Container(
                     height: media.height * 1,
                     width: media.width * 1,
-                    color: page,
-                  ),
+                    color: page),
 
             //No internet
             (internet == false)
                 ? Positioned(
                     top: 0,
-                    child: NoInternet(onTap: () {
-                      setState(() {
-                        _isLoading = true;
-                        internet = true;
-                        countryCode();
-                      });
-                    }))
-                : Container(),
+                    child: NoInternet(
+                        onTap: () => setState(() {
+                              _isLoading = true;
+                              internet = true;
+                              countryCode();
+                            })))
+                : const SizedBox.shrink(),
 
             //loader
             (_isLoading == true)
                 ? const Positioned(top: 0, child: Loading())
-                : Container()
+                : const SizedBox.shrink()
           ],
         ),
       ),

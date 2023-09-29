@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class SelectLanguage extends StatefulWidget {
   const SelectLanguage({Key? key}) : super(key: key);
@@ -23,7 +18,6 @@ class _SelectLanguageState extends State<SelectLanguage> {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Material(
       child: Directionality(
         textDirection: (languageDirection == 'rtl')
@@ -32,10 +26,10 @@ class _SelectLanguageState extends State<SelectLanguage> {
         child: Stack(
           children: [
             Container(
-              height: media.height * 1,
-              width: media.width * 1,
-              padding: EdgeInsets.fromLTRB(media.width * 0.05,
-                  media.width * 0.05, media.width * 0.05, media.width * 0.05),
+              height: context.h * 1,
+              width: context.w * 1,
+              padding: EdgeInsets.fromLTRB(context.w * 0.05, context.w * 0.05,
+                  context.w * 0.05, context.w * 0.05),
               color: page,
               child: Column(
                 children: [
@@ -43,13 +37,13 @@ class _SelectLanguageState extends State<SelectLanguage> {
                   Stack(
                     children: [
                       Container(
-                        padding: EdgeInsets.only(bottom: media.width * 0.05),
-                        width: media.width * 1,
+                        padding: EdgeInsets.only(bottom: context.w * 0.05),
+                        width: context.w * 1,
                         alignment: Alignment.center,
                         child: Text(
                           languages[choosenLanguage]['text_change_language'],
                           style: TextStyle(
-                              fontSize: media.width * twenty,
+                              fontSize: context.w * twenty,
                               fontWeight: FontWeight.w600,
                               color: textColor),
                         ),
@@ -63,18 +57,18 @@ class _SelectLanguageState extends State<SelectLanguage> {
                     ],
                   ),
                   SizedBox(
-                    height: media.width * 0.05,
+                    height: context.w * 0.05,
                   ),
                   SizedBox(
-                    width: media.width * 0.9,
-                    height: media.height * 0.16,
+                    width: context.w * 0.9,
+                    height: context.h * 0.16,
                     child: Image.asset(
                       'assets/images/selectLanguage.png',
                       fit: BoxFit.contain,
                     ),
                   ),
                   SizedBox(
-                    height: media.width * 0.1,
+                    height: context.w * 0.1,
                   ),
                   Expanded(
                     child: SizedBox(
@@ -88,14 +82,11 @@ class _SelectLanguageState extends State<SelectLanguage> {
                                   return MapEntry(
                                       i,
                                       InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            _choosenLanguage = i;
-                                          });
-                                        },
+                                        onTap: () => setState(
+                                            () => _choosenLanguage = i),
                                         child: Container(
-                                          padding: EdgeInsets.all(
-                                              media.width * 0.025),
+                                          padding:
+                                              EdgeInsets.all(context.w * 0.025),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -113,15 +104,15 @@ class _SelectLanguageState extends State<SelectLanguage> {
                                                             i)['name']
                                                         .toString(),
                                                     style: TextStyle(
-                                                        fontSize: media.width *
-                                                            sixteen,
+                                                        fontSize:
+                                                            context.w * sixteen,
                                                         color: textColor),
                                                   ),
                                                 ],
                                               ),
                                               Container(
-                                                height: media.width * 0.05,
-                                                width: media.width * 0.05,
+                                                height: context.w * 0.05,
+                                                width: context.w * 0.05,
                                                 decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
                                                     border: Border.all(
@@ -132,9 +123,8 @@ class _SelectLanguageState extends State<SelectLanguage> {
                                                 child: (_choosenLanguage == i)
                                                     ? Container(
                                                         height:
-                                                            media.width * 0.03,
-                                                        width:
-                                                            media.width * 0.03,
+                                                            context.w * 0.03,
+                                                        width: context.w * 0.03,
                                                         decoration:
                                                             const BoxDecoration(
                                                                 shape: BoxShape
@@ -142,7 +132,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
                                                                 color: Color(
                                                                     0xff222222)),
                                                       )
-                                                    : Container(),
+                                                    : const SizedBox.shrink(),
                                               )
                                             ],
                                           ),
@@ -185,7 +175,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
             //loader
             (_isLoading == true)
                 ? const Positioned(top: 0, child: Loading())
-                : Container()
+                : const SizedBox.shrink()
           ],
         ),
       ),

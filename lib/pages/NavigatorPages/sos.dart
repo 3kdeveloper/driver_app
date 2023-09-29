@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/NavigatorPages/pickcontacts.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class Sos extends StatefulWidget {
   const Sos({Key? key}) : super(key: key);
@@ -21,7 +14,6 @@ class _SosState extends State<Sos> {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Material(
       child: ValueListenableBuilder(
           valueListenable: valueNotifierBook.value,
@@ -34,26 +26,26 @@ class _SosState extends State<Sos> {
                 children: [
                   Container(
                     padding: EdgeInsets.only(
-                        left: media.width * 0.05, right: media.width * 0.05),
-                    height: media.height * 1,
-                    width: media.width * 1,
+                        left: context.w * 0.05, right: context.w * 0.05),
+                    height: context.h * 1,
+                    width: context.w * 1,
                     color: page,
                     child: Column(
                       children: [
                         SizedBox(
                             height: MediaQuery.of(context).padding.top +
-                                media.width * 0.05),
+                                context.w * 0.05),
                         Stack(
                           children: [
                             Container(
                               padding:
-                                  EdgeInsets.only(bottom: media.width * 0.05),
-                              width: media.width * 1,
+                                  EdgeInsets.only(bottom: context.w * 0.05),
+                              width: context.w * 1,
                               alignment: Alignment.center,
                               child: Text(
                                 languages[choosenLanguage]['text_sos'],
                                 style: GoogleFonts.roboto(
-                                    fontSize: media.width * twenty,
+                                    fontSize: context.w * twenty,
                                     fontWeight: FontWeight.w600,
                                     color: textColor),
                               ),
@@ -67,44 +59,44 @@ class _SosState extends State<Sos> {
                           ],
                         ),
                         SizedBox(
-                          height: media.width * 0.05,
+                          height: context.w * 0.05,
                         ),
                         SizedBox(
-                          height: media.height * 0.25,
+                          height: context.h * 0.25,
                           child: Image.asset(
                             'assets/images/sos_bg.jpg',
                             fit: BoxFit.contain,
                           ),
                         ),
                         SizedBox(
-                          height: media.width * 0.05,
+                          height: context.w * 0.05,
                         ),
                         Text(
                           languages[choosenLanguage]['text_trust_contact_3'],
                           style: GoogleFonts.roboto(
-                              fontSize: media.width * fourteen,
+                              fontSize: context.w * fourteen,
                               fontWeight: FontWeight.w600,
                               color: textColor),
                         ),
                         Text(
                           languages[choosenLanguage]['text_trust_contact_4'],
                           style: GoogleFonts.roboto(
-                              fontSize: media.width * twelve, color: textColor),
+                              fontSize: context.w * twelve, color: textColor),
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(
-                          height: media.width * 0.05,
+                          height: context.w * 0.05,
                         ),
                         Text(
                           languages[choosenLanguage]
                               ['text_yourTrustedContacts'],
                           style: GoogleFonts.roboto(
-                              fontSize: media.width * fourteen,
+                              fontSize: context.w * fourteen,
                               fontWeight: FontWeight.w600,
                               color: buttonColor),
                         ),
                         SizedBox(
-                          height: media.width * 0.025,
+                          height: context.w * 0.025,
                         ),
                         Expanded(
                           child: SingleChildScrollView(
@@ -112,7 +104,7 @@ class _SosState extends State<Sos> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: media.width * 0.025,
+                                  height: context.w * 0.025,
                                 ),
                                 (sosData
                                         .where((element) =>
@@ -129,7 +121,7 @@ class _SosState extends State<Sos> {
                                                       ? Container(
                                                           padding:
                                                               EdgeInsets.all(
-                                                                  media.width *
+                                                                  context.w *
                                                                       0.025),
                                                           child: Row(
                                                             mainAxisAlignment:
@@ -142,15 +134,15 @@ class _SosState extends State<Sos> {
                                                                         .start,
                                                                 children: [
                                                                   SizedBox(
-                                                                    width: media
-                                                                            .width *
+                                                                    width: context
+                                                                            .w *
                                                                         0.7,
                                                                     child: Text(
                                                                       sosData[i]
                                                                           [
                                                                           'name'],
                                                                       style: GoogleFonts.roboto(
-                                                                          fontSize: media.width *
+                                                                          fontSize: context.w *
                                                                               sixteen,
                                                                           fontWeight: FontWeight
                                                                               .w600,
@@ -159,16 +151,15 @@ class _SosState extends State<Sos> {
                                                                     ),
                                                                   ),
                                                                   SizedBox(
-                                                                    height: media
-                                                                            .width *
-                                                                        0.01,
-                                                                  ),
+                                                                      height: context
+                                                                              .w *
+                                                                          0.01),
                                                                   Text(
                                                                     sosData[i][
                                                                         'number'],
                                                                     style: GoogleFonts.roboto(
                                                                         fontSize:
-                                                                            media.width *
+                                                                            context.w *
                                                                                 twelve,
                                                                         color:
                                                                             textColor),
@@ -202,7 +193,7 @@ class _SosState extends State<Sos> {
                                         languages[choosenLanguage]
                                             ['text_noDataFound'],
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * eighteen,
+                                            fontSize: context.w * eighteen,
                                             fontWeight: FontWeight.w600,
                                             color: textColor),
                                       )
@@ -219,8 +210,8 @@ class _SosState extends State<Sos> {
                                 5)
                             ? Container(
                                 padding: EdgeInsets.only(
-                                    top: media.width * 0.05,
-                                    bottom: media.width * 0.05),
+                                    top: context.w * 0.05,
+                                    bottom: context.w * 0.05),
                                 child: Button(
                                     onTap: () async {
                                       var nav = await Navigator.push(
@@ -245,20 +236,20 @@ class _SosState extends State<Sos> {
                       ? Positioned(
                           top: 0,
                           child: Container(
-                            height: media.height * 1,
-                            width: media.width * 1,
+                            height: context.h * 1,
+                            width: context.w * 1,
                             color: Colors.transparent.withOpacity(0.6),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SizedBox(
-                                  width: media.width * 0.9,
+                                  width: context.w * 0.9,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Container(
-                                          height: media.height * 0.1,
-                                          width: media.width * 0.1,
+                                          height: context.h * 0.1,
+                                          width: context.w * 0.1,
                                           decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: page),
@@ -274,8 +265,8 @@ class _SosState extends State<Sos> {
                                   ),
                                 ),
                                 Container(
-                                  padding: EdgeInsets.all(media.width * 0.05),
-                                  width: media.width * 0.9,
+                                  padding: EdgeInsets.all(context.w * 0.05),
+                                  width: context.w * 0.9,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: page),
@@ -286,12 +277,12 @@ class _SosState extends State<Sos> {
                                             ['text_removeSos'],
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * sixteen,
+                                            fontSize: context.w * sixteen,
                                             color: textColor,
                                             fontWeight: FontWeight.w600),
                                       ),
                                       SizedBox(
-                                        height: media.width * 0.05,
+                                        height: context.w * 0.05,
                                       ),
                                       Button(
                                           onTap: () async {

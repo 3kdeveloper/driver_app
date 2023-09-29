@@ -1,32 +1,21 @@
-import 'dart:convert';
 
-import 'dart:io';
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:awii/pages/NavigatorPages/editprofile.dart';
-import 'package:awii/pages/onTripPage/map_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:awii/core/constants/exports.dart';
 import 'package:awii/pages/NavigatorPages/history.dart';
 import 'package:awii/pages/NavigatorPages/makecomplaint.dart';
-import 'package:awii/pages/onTripPage/booking_confirmation.dart';
 import 'package:awii/pages/login/get_started.dart';
-import 'package:awii/pages/login/login.dart';
 import 'package:awii/pages/onTripPage/choosegoods.dart';
 import 'package:awii/pages/onTripPage/review_page.dart';
-import 'package:awii/pages/referralcode/referral_code.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
-import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
-import '../styles/styles.dart';
 
 //languages code
 dynamic phcode;

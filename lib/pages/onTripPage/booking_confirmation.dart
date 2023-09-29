@@ -58,7 +58,6 @@ Animation<double>? _animation;
 class _BookingConfirmationState extends State<BookingConfirmation>
     with WidgetsBindingObserver, TickerProviderStateMixin {
   TextEditingController promoKey = TextEditingController();
-
   TextEditingController pickerName = TextEditingController();
   TextEditingController pickerNumber = TextEditingController();
   TextEditingController instructions = TextEditingController();
@@ -563,7 +562,7 @@ class _BookingConfirmationState extends State<BookingConfirmation>
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Invoice()),
+                              builder: (context) => const InvoiceScreen()),
                           (route) => false);
                     });
                   }

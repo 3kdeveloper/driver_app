@@ -1,14 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/loadingPage/loadingpage.dart';
-import 'package:awii/pages/noInternet/nointernet.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class ReferralPage extends StatefulWidget {
   const ReferralPage({Key? key}) : super(key: key);
@@ -49,7 +39,6 @@ class _ReferralPageState extends State<ReferralPage> {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Material(
       child: ValueListenableBuilder(
           valueListenable: valueNotifierHome.value,
@@ -62,9 +51,9 @@ class _ReferralPageState extends State<ReferralPage> {
                 alignment: Alignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(media.width * 0.05),
-                    height: media.height * 1,
-                    width: media.width * 1,
+                    padding: EdgeInsets.all(context.w * 0.05),
+                    height: context.h * 1,
+                    width: context.w * 1,
                     color: page,
                     child: (myReferralCode.isNotEmpty)
                         ? Column(
@@ -79,14 +68,14 @@ class _ReferralPageState extends State<ReferralPage> {
                                       children: [
                                         Container(
                                           padding: EdgeInsets.only(
-                                              bottom: media.width * 0.05),
-                                          width: media.width * 1,
+                                              bottom: context.w * 0.05),
+                                          width: context.w * 1,
                                           alignment: Alignment.center,
                                           child: Text(
                                             languages[choosenLanguage]
                                                 ['text_enable_referal'],
                                             style: GoogleFonts.roboto(
-                                                fontSize: media.width * twenty,
+                                                fontSize: context.w * twenty,
                                                 fontWeight: FontWeight.w600,
                                                 color: textColor),
                                           ),
@@ -101,36 +90,36 @@ class _ReferralPageState extends State<ReferralPage> {
                                       ],
                                     ),
                                     Container(
-                                      width: media.width,
+                                      width: context.w,
                                       padding: const EdgeInsets.all(32),
                                       decoration: const BoxDecoration(
                                         color: Color(0xFFF7F7F7),
                                       ),
-                                      height: media.height * 0.24,
+                                      height: context.h * 0.24,
                                       child: Image.asset(
                                         'assets/images/referral.jpg',
                                         fit: BoxFit.contain,
                                       ),
                                     ),
                                     SizedBox(
-                                      height: media.width * 0.1,
+                                      height: context.w * 0.1,
                                     ),
                                     Text(
                                       myReferralCode[
                                           'referral_comission_string'],
                                       textAlign: TextAlign.center,
                                       style: GoogleFonts.roboto(
-                                          fontSize: media.width * sixteen,
+                                          fontSize: context.w * sixteen,
                                           color: textColor,
                                           fontWeight: FontWeight.w600),
                                     ),
                                     SizedBox(
-                                      height: media.width * 0.05,
+                                      height: context.w * 0.05,
                                     ),
                                     Container(
-                                        width: media.width * 0.9,
+                                        width: context.w * 0.9,
                                         padding:
-                                            EdgeInsets.all(media.width * 0.05),
+                                            EdgeInsets.all(context.w * 0.05),
                                         decoration: BoxDecoration(
                                             border: Border.all(
                                                 color: borderLines, width: 1.2),
@@ -143,8 +132,7 @@ class _ReferralPageState extends State<ReferralPage> {
                                             Text(
                                               myReferralCode['refferal_code'],
                                               style: GoogleFonts.roboto(
-                                                  fontSize:
-                                                      media.width * sixteen,
+                                                  fontSize: context.w * sixteen,
                                                   color: textColor,
                                                   fontWeight: FontWeight.w600),
                                             ),
@@ -165,8 +153,8 @@ class _ReferralPageState extends State<ReferralPage> {
                               ),
                               Container(
                                 padding: EdgeInsets.only(
-                                    top: media.width * 0.05,
-                                    bottom: media.width * 0.05),
+                                    top: context.w * 0.05,
+                                    bottom: context.w * 0.05),
                                 child: Button(
                                     onTap: () async {
                                       await Share.share(
@@ -211,16 +199,16 @@ class _ReferralPageState extends State<ReferralPage> {
                   //display toast
                   (_showToast == true)
                       ? Positioned(
-                          bottom: media.height * 0.2,
+                          bottom: context.h * 0.2,
                           child: Container(
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.transparent.withOpacity(0.6)),
                             child: Text(
                               languages[choosenLanguage]['text_code_copied'],
                               style: GoogleFonts.roboto(
-                                  fontSize: media.width * twelve,
+                                  fontSize: context.w * twelve,
                                   color: Colors.white),
                             ),
                           ))

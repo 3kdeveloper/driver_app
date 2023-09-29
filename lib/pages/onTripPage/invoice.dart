@@ -1,27 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/NavigatorPages/cashfreepage.dart';
-import 'package:awii/pages/NavigatorPages/flutterwavepage.dart';
-import 'package:awii/pages/NavigatorPages/paystackpayment.dart';
-import 'package:awii/pages/NavigatorPages/razorpaypage.dart';
-import 'package:awii/pages/NavigatorPages/selectwallet.dart';
-import 'package:awii/pages/NavigatorPages/walletpage.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/onTripPage/booking_confirmation.dart';
-import 'package:awii/pages/onTripPage/map_page.dart';
-import 'package:awii/pages/onTripPage/review_page.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
+import 'package:awii/core/constants/exports.dart';
 
-class Invoice extends StatefulWidget {
-  const Invoice({Key? key}) : super(key: key);
+class InvoiceScreen extends StatefulWidget {
+  const InvoiceScreen({Key? key}) : super(key: key);
 
   @override
-  State<Invoice> createState() => _InvoiceState();
+  State<InvoiceScreen> createState() => _InvoiceScreenState();
 }
 
-class _InvoiceState extends State<Invoice> {
+class _InvoiceScreenState extends State<InvoiceScreen> {
   bool _choosePayment = false;
   bool _isLoading = false;
 
@@ -37,7 +23,6 @@ class _InvoiceState extends State<Invoice> {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Material(
       child: Directionality(
         textDirection: (languageDirection == 'rtl')
@@ -47,12 +32,12 @@ class _InvoiceState extends State<Invoice> {
           children: [
             Container(
               padding: EdgeInsets.fromLTRB(
-                  media.width * 0.05,
-                  MediaQuery.of(context).padding.top + media.width * 0.05,
-                  media.width * 0.05,
-                  media.width * 0.05),
-              height: media.height * 1,
-              width: media.width * 1,
+                  context.w * 0.05,
+                  MediaQuery.of(context).padding.top + context.w * 0.05,
+                  context.w * 0.05,
+                  context.w * 0.05),
+              height: context.h * 1,
+              width: context.w * 1,
               color: page,
               //invoice details
               child: Column(
@@ -66,18 +51,18 @@ class _InvoiceState extends State<Invoice> {
                           Text(
                             languages[choosenLanguage]['text_tripsummary'],
                             style: TextStyle(
-                                fontSize: media.width * sixteen,
+                                fontSize: context.w * sixteen,
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
-                            height: media.height * 0.04,
+                            height: context.h * 0.04,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                height: media.width * 0.13,
-                                width: media.width * 0.13,
+                                height: context.w * 0.13,
+                                width: context.w * 0.13,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     image: DecorationImage(
@@ -87,21 +72,21 @@ class _InvoiceState extends State<Invoice> {
                                         fit: BoxFit.cover)),
                               ),
                               SizedBox(
-                                width: media.width * 0.05,
+                                width: context.w * 0.05,
                               ),
                               Text(
                                 userRequestData['driverDetail']['data']['name'],
                                 style: TextStyle(
-                                  fontSize: media.width * eighteen,
+                                  fontSize: context.w * eighteen,
                                 ),
                               )
                             ],
                           ),
                           SizedBox(
-                            height: media.height * 0.05,
+                            height: context.h * 0.05,
                           ),
                           SizedBox(
-                            width: media.width * 0.72,
+                            width: context.w * 0.72,
                             child: Column(
                               children: [
                                 Row(
@@ -114,16 +99,16 @@ class _InvoiceState extends State<Invoice> {
                                           languages[choosenLanguage]
                                               ['text_reference'],
                                           style: TextStyle(
-                                              fontSize: media.width * twelve,
+                                              fontSize: context.w * twelve,
                                               color: const Color(0xff898989)),
                                         ),
                                         SizedBox(
-                                          height: media.width * 0.02,
+                                          height: context.w * 0.02,
                                         ),
                                         Text(
                                           userRequestData['request_number'],
                                           style: TextStyle(
-                                              fontSize: media.width * fourteen,
+                                              fontSize: context.w * fourteen,
                                               color: textColor),
                                         )
                                       ],
@@ -134,11 +119,11 @@ class _InvoiceState extends State<Invoice> {
                                           languages[choosenLanguage]
                                               ['text_rideType'],
                                           style: TextStyle(
-                                              fontSize: media.width * twelve,
+                                              fontSize: context.w * twelve,
                                               color: const Color(0xff898989)),
                                         ),
                                         SizedBox(
-                                          height: media.width * 0.02,
+                                          height: context.w * 0.02,
                                         ),
                                         Text(
                                           (userRequestData['is_rental'] ==
@@ -148,7 +133,7 @@ class _InvoiceState extends State<Invoice> {
                                               : languages[choosenLanguage]
                                                   ['text_rental'],
                                           style: TextStyle(
-                                              fontSize: media.width * fourteen,
+                                              fontSize: context.w * fourteen,
                                               color: textColor),
                                         )
                                       ],
@@ -156,14 +141,14 @@ class _InvoiceState extends State<Invoice> {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: media.height * 0.02,
+                                  height: context.h * 0.02,
                                 ),
                                 Container(
                                   height: 2,
                                   color: const Color(0xffAAAAAA),
                                 ),
                                 SizedBox(
-                                  height: media.height * 0.02,
+                                  height: context.h * 0.02,
                                 ),
                                 Row(
                                   mainAxisAlignment:
@@ -175,18 +160,18 @@ class _InvoiceState extends State<Invoice> {
                                           languages[choosenLanguage]
                                               ['text_distance'],
                                           style: TextStyle(
-                                              fontSize: media.width * twelve,
+                                              fontSize: context.w * twelve,
                                               color: const Color(0xff898989)),
                                         ),
                                         SizedBox(
-                                          height: media.width * 0.02,
+                                          height: context.w * 0.02,
                                         ),
                                         Text(
                                           userRequestData['total_distance'] +
                                               ' ' +
                                               userRequestData['unit'],
                                           style: TextStyle(
-                                              fontSize: media.width * fourteen,
+                                              fontSize: context.w * fourteen,
                                               color: textColor),
                                         )
                                       ],
@@ -197,16 +182,16 @@ class _InvoiceState extends State<Invoice> {
                                           languages[choosenLanguage]
                                               ['text_duration'],
                                           style: TextStyle(
-                                              fontSize: media.width * twelve,
+                                              fontSize: context.w * twelve,
                                               color: const Color(0xff898989)),
                                         ),
                                         SizedBox(
-                                          height: media.width * 0.02,
+                                          height: context.w * 0.02,
                                         ),
                                         Text(
                                           '${userRequestData['total_time']} mins',
                                           style: TextStyle(
-                                              fontSize: media.width * fourteen,
+                                              fontSize: context.w * fourteen,
                                               color: textColor),
                                         )
                                       ],
@@ -217,30 +202,30 @@ class _InvoiceState extends State<Invoice> {
                             ),
                           ),
                           SizedBox(
-                            height: media.height * 0.05,
+                            height: context.h * 0.05,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Icon(Icons.info),
                               SizedBox(
-                                width: media.width * 0.04,
+                                width: context.w * 0.04,
                               ),
                               Text(
                                 languages[choosenLanguage]['text_tripfare'],
                                 style: TextStyle(
-                                    fontSize: media.width * fourteen,
+                                    fontSize: context.w * fourteen,
                                     color: textColor),
                               )
                             ],
                           ),
                           SizedBox(
-                            height: media.height * 0.05,
+                            height: context.h * 0.05,
                           ),
                           (userRequestData['is_rental'] == true)
                               ? Container(
-                                  padding: EdgeInsets.only(
-                                      bottom: media.width * 0.05),
+                                  padding:
+                                      EdgeInsets.only(bottom: context.w * 0.05),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -249,39 +234,39 @@ class _InvoiceState extends State<Invoice> {
                                         languages[choosenLanguage]
                                             ['text_ride_type'],
                                         style: TextStyle(
-                                            fontSize: media.width * fourteen,
+                                            fontSize: context.w * fourteen,
                                             color: textColor),
                                       ),
                                       Text(
                                         userRequestData['rental_package_name'],
                                         style: TextStyle(
-                                            fontSize: media.width * fourteen,
+                                            fontSize: context.w * fourteen,
                                             color: textColor),
                                       ),
                                     ],
                                   ),
                                 )
-                              : Container(),
+                              : const SizedBox.shrink(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 languages[choosenLanguage]['text_baseprice'],
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                               Text(
                                 '${userRequestData['requestBill']['data']['requested_currency_symbol']} ${userRequestData['requestBill']['data']['base_price']}',
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                             ],
                           ),
 
                           SizedBox(
-                            height: media.height * 0.02,
+                            height: context.h * 0.02,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -289,7 +274,7 @@ class _InvoiceState extends State<Invoice> {
                               Text(
                                 languages[choosenLanguage]['text_distprice'],
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                               Text(
@@ -300,13 +285,13 @@ class _InvoiceState extends State<Invoice> {
                                             ['distance_price']
                                         .toString(),
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: media.height * 0.02,
+                            height: context.h * 0.02,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -314,7 +299,7 @@ class _InvoiceState extends State<Invoice> {
                               Text(
                                 languages[choosenLanguage]['text_timeprice'],
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                               Text(
@@ -325,7 +310,7 @@ class _InvoiceState extends State<Invoice> {
                                             ['time_price']
                                         .toString(),
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                             ],
@@ -334,9 +319,9 @@ class _InvoiceState extends State<Invoice> {
                                       ['cancellation_fee'] !=
                                   0)
                               ? SizedBox(
-                                  height: media.height * 0.02,
+                                  height: context.h * 0.02,
                                 )
-                              : Container(),
+                              : const SizedBox.shrink(),
                           (userRequestData['requestBill']['data']
                                       ['cancellation_fee'] !=
                                   0)
@@ -348,7 +333,7 @@ class _InvoiceState extends State<Invoice> {
                                       languages[choosenLanguage]
                                           ['text_cancelfee'],
                                       style: TextStyle(
-                                          fontSize: media.width * twelve,
+                                          fontSize: context.w * twelve,
                                           color: textColor),
                                     ),
                                     Text(
@@ -359,19 +344,19 @@ class _InvoiceState extends State<Invoice> {
                                                   ['cancellation_fee']
                                               .toString(),
                                       style: TextStyle(
-                                          fontSize: media.width * twelve,
+                                          fontSize: context.w * twelve,
                                           color: textColor),
                                     ),
                                   ],
                                 )
-                              : Container(),
+                              : const SizedBox.shrink(),
                           (userRequestData['requestBill']['data']
                                       ['airport_surge_fee'] !=
                                   0)
                               ? SizedBox(
-                                  height: media.height * 0.02,
+                                  height: context.h * 0.02,
                                 )
-                              : Container(),
+                              : const SizedBox.shrink(),
                           (userRequestData['requestBill']['data']
                                       ['airport_surge_fee'] !=
                                   0)
@@ -383,7 +368,7 @@ class _InvoiceState extends State<Invoice> {
                                       languages[choosenLanguage]
                                           ['text_surge_fee'],
                                       style: TextStyle(
-                                          fontSize: media.width * twelve,
+                                          fontSize: context.w * twelve,
                                           color: textColor),
                                     ),
                                     Text(
@@ -394,15 +379,13 @@ class _InvoiceState extends State<Invoice> {
                                                   ['airport_surge_fee']
                                               .toString(),
                                       style: TextStyle(
-                                          fontSize: media.width * twelve,
+                                          fontSize: context.w * twelve,
                                           color: textColor),
                                     ),
                                   ],
                                 )
-                              : Container(),
-                          SizedBox(
-                            height: media.height * 0.02,
-                          ),
+                              : const SizedBox.shrink(),
+                          SizedBox(height: context.h * 0.02),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -423,7 +406,7 @@ class _InvoiceState extends State<Invoice> {
                                     ' mins' +
                                     ')',
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                               Text(
@@ -434,13 +417,13 @@ class _InvoiceState extends State<Invoice> {
                                             ['waiting_charge']
                                         .toString(),
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: media.height * 0.02,
+                            height: context.h * 0.02,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -448,7 +431,7 @@ class _InvoiceState extends State<Invoice> {
                               Text(
                                 languages[choosenLanguage]['text_convfee'],
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                               Text(
@@ -459,7 +442,7 @@ class _InvoiceState extends State<Invoice> {
                                             ['admin_commision']
                                         .toString(),
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                             ],
@@ -468,9 +451,9 @@ class _InvoiceState extends State<Invoice> {
                                       ['promo_discount'] !=
                                   null)
                               ? SizedBox(
-                                  height: media.height * 0.02,
+                                  height: context.h * 0.02,
                                 )
-                              : Container(),
+                              : const SizedBox.shrink(),
                           (userRequestData['requestBill']['data']
                                       ['promo_discount'] !=
                                   null)
@@ -482,7 +465,7 @@ class _InvoiceState extends State<Invoice> {
                                       languages[choosenLanguage]
                                           ['text_discount'],
                                       style: TextStyle(
-                                          fontSize: media.width * twelve,
+                                          fontSize: context.w * twelve,
                                           color: Colors.red),
                                     ),
                                     Text(
@@ -493,14 +476,14 @@ class _InvoiceState extends State<Invoice> {
                                                   ['promo_discount']
                                               .toString(),
                                       style: TextStyle(
-                                          fontSize: media.width * twelve,
+                                          fontSize: context.w * twelve,
                                           color: Colors.red),
                                     ),
                                   ],
                                 )
-                              : Container(),
+                              : const SizedBox.shrink(),
                           SizedBox(
-                            height: media.height * 0.02,
+                            height: context.h * 0.02,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -508,7 +491,7 @@ class _InvoiceState extends State<Invoice> {
                               Text(
                                 languages[choosenLanguage]['text_taxes'],
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                               Text(
@@ -519,20 +502,20 @@ class _InvoiceState extends State<Invoice> {
                                             ['service_tax']
                                         .toString(),
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: media.height * 0.02,
+                            height: context.h * 0.02,
                           ),
                           Container(
                             height: 1.5,
                             color: const Color(0xffE0E0E0),
                           ),
                           SizedBox(
-                            height: media.height * 0.02,
+                            height: context.h * 0.02,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -540,7 +523,7 @@ class _InvoiceState extends State<Invoice> {
                               Text(
                                 languages[choosenLanguage]['text_totalfare'],
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                               Text(
@@ -551,21 +534,21 @@ class _InvoiceState extends State<Invoice> {
                                             ['total_amount']
                                         .toString(),
                                 style: TextStyle(
-                                    fontSize: media.width * twelve,
+                                    fontSize: context.w * twelve,
                                     color: textColor),
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: media.height * 0.02,
+                            height: context.h * 0.02,
                           ),
                           Container(
                             height: 1.5,
                             color: const Color(0xffE0E0E0),
                           ),
-                          // SizedBox(height: media.height*0.02,),
+                          // SizedBox(height: context.h*0.02,),
                           SizedBox(
-                            height: media.height * 0.05,
+                            height: context.h * 0.05,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -579,7 +562,7 @@ class _InvoiceState extends State<Invoice> {
                                         : languages[choosenLanguage]
                                             ['text_card'],
                                 style: TextStyle(
-                                    fontSize: media.width * sixteen,
+                                    fontSize: context.w * sixteen,
                                     color: buttonColor),
                               ),
                               Text(
@@ -590,7 +573,7 @@ class _InvoiceState extends State<Invoice> {
                                             ['total_amount']
                                         .toString(),
                                 style: TextStyle(
-                                    fontSize: media.width * twentysix,
+                                    fontSize: context.w * twentysix,
                                     color: textColor,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -631,14 +614,14 @@ class _InvoiceState extends State<Invoice> {
             (_choosePayment == true)
                 ? Positioned(
                     child: Container(
-                    height: media.height * 1,
-                    width: media.width * 1,
+                    height: context.h * 1,
+                    width: context.w * 1,
                     color: Colors.transparent.withOpacity(0.6),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: media.width * 0.8,
+                          width: context.w * 0.8,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -649,8 +632,8 @@ class _InvoiceState extends State<Invoice> {
                                   });
                                 },
                                 child: Container(
-                                  height: media.height * 0.05,
-                                  width: media.height * 0.05,
+                                  height: context.h * 0.05,
+                                  width: context.h * 0.05,
                                   decoration: BoxDecoration(
                                     color: page,
                                     shape: BoxShape.circle,
@@ -661,27 +644,27 @@ class _InvoiceState extends State<Invoice> {
                             ],
                           ),
                         ),
-                        SizedBox(height: media.width * 0.025),
+                        SizedBox(height: context.w * 0.025),
                         Container(
-                          padding: EdgeInsets.all(media.width * 0.05),
-                          width: media.width * 0.8,
-                          height: media.height * 0.6,
+                          padding: EdgeInsets.all(context.w * 0.05),
+                          width: context.w * 0.8,
+                          height: context.h * 0.6,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: page),
                           child: Column(
                             children: [
                               SizedBox(
-                                  width: media.width * 0.7,
+                                  width: context.w * 0.7,
                                   child: Text(
                                     languages[choosenLanguage]
                                         ['text_choose_payment'],
                                     style: TextStyle(
-                                        fontSize: media.width * eighteen,
+                                        fontSize: context.w * eighteen,
                                         fontWeight: FontWeight.w600),
                                   )),
                               SizedBox(
-                                height: media.width * 0.05,
+                                height: context.w * 0.05,
                               ),
                               Expanded(
                                 child: SingleChildScrollView(
@@ -691,9 +674,9 @@ class _InvoiceState extends State<Invoice> {
                                       (walletBalance['stripe'] == true)
                                           ? Container(
                                               margin: EdgeInsets.only(
-                                                  bottom: media.width * 0.025),
+                                                  bottom: context.w * 0.025),
                                               alignment: Alignment.center,
-                                              width: media.width * 0.7,
+                                              width: context.w * 0.7,
                                               child: InkWell(
                                                 onTap: () async {
                                                   addMoney = double.parse(
@@ -723,8 +706,8 @@ class _InvoiceState extends State<Invoice> {
                                                   }
                                                 },
                                                 child: Container(
-                                                  width: media.width * 0.25,
-                                                  height: media.width * 0.125,
+                                                  width: context.w * 0.25,
+                                                  height: context.w * 0.125,
                                                   decoration: const BoxDecoration(
                                                       image: DecorationImage(
                                                           image: AssetImage(
@@ -732,13 +715,13 @@ class _InvoiceState extends State<Invoice> {
                                                           fit: BoxFit.contain)),
                                                 ),
                                               ))
-                                          : Container(),
+                                          : const SizedBox.shrink(),
                                       (walletBalance['paystack'] == true)
                                           ? Container(
                                               alignment: Alignment.center,
                                               margin: EdgeInsets.only(
-                                                  bottom: media.width * 0.025),
-                                              width: media.width * 0.7,
+                                                  bottom: context.w * 0.025),
+                                              width: context.w * 0.7,
                                               child: InkWell(
                                                 onTap: () async {
                                                   addMoney = int.parse(
@@ -768,8 +751,8 @@ class _InvoiceState extends State<Invoice> {
                                                   }
                                                 },
                                                 child: Container(
-                                                  width: media.width * 0.25,
-                                                  height: media.width * 0.125,
+                                                  width: context.w * 0.25,
+                                                  height: context.w * 0.125,
                                                   decoration: const BoxDecoration(
                                                       image: DecorationImage(
                                                           image: AssetImage(
@@ -777,13 +760,13 @@ class _InvoiceState extends State<Invoice> {
                                                           fit: BoxFit.contain)),
                                                 ),
                                               ))
-                                          : Container(),
+                                          : const SizedBox.shrink(),
                                       (walletBalance['flutter_wave'] == true)
                                           ? Container(
                                               margin: EdgeInsets.only(
-                                                  bottom: media.width * 0.025),
+                                                  bottom: context.w * 0.025),
                                               alignment: Alignment.center,
-                                              width: media.width * 0.7,
+                                              width: context.w * 0.7,
                                               child: InkWell(
                                                 onTap: () async {
                                                   addMoney = double.parse(
@@ -808,8 +791,8 @@ class _InvoiceState extends State<Invoice> {
                                                   }
                                                 },
                                                 child: Container(
-                                                  width: media.width * 0.25,
-                                                  height: media.width * 0.125,
+                                                  width: context.w * 0.25,
+                                                  height: context.w * 0.125,
                                                   decoration: const BoxDecoration(
                                                       image: DecorationImage(
                                                           image: AssetImage(
@@ -817,13 +800,13 @@ class _InvoiceState extends State<Invoice> {
                                                           fit: BoxFit.contain)),
                                                 ),
                                               ))
-                                          : Container(),
+                                          : const SizedBox.shrink(),
                                       (walletBalance['razor_pay'] == true)
                                           ? Container(
                                               margin: EdgeInsets.only(
-                                                  bottom: media.width * 0.025),
+                                                  bottom: context.w * 0.025),
                                               alignment: Alignment.center,
-                                              width: media.width * 0.7,
+                                              width: context.w * 0.7,
                                               child: InkWell(
                                                 onTap: () async {
                                                   addMoney = int.parse(
@@ -853,8 +836,8 @@ class _InvoiceState extends State<Invoice> {
                                                   }
                                                 },
                                                 child: Container(
-                                                  width: media.width * 0.25,
-                                                  height: media.width * 0.125,
+                                                  width: context.w * 0.25,
+                                                  height: context.w * 0.125,
                                                   decoration: const BoxDecoration(
                                                       image: DecorationImage(
                                                           image: AssetImage(
@@ -862,13 +845,13 @@ class _InvoiceState extends State<Invoice> {
                                                           fit: BoxFit.contain)),
                                                 ),
                                               ))
-                                          : Container(),
+                                          : const SizedBox.shrink(),
                                       (walletBalance['cash_free'] == true)
                                           ? Container(
                                               margin: EdgeInsets.only(
-                                                  bottom: media.width * 0.025),
+                                                  bottom: context.w * 0.025),
                                               alignment: Alignment.center,
-                                              width: media.width * 0.7,
+                                              width: context.w * 0.7,
                                               child: InkWell(
                                                 onTap: () async {
                                                   addMoney = double.parse(
@@ -891,15 +874,14 @@ class _InvoiceState extends State<Invoice> {
                                                         _choosePayment = false;
                                                       });
                                                       await getUserDetails();
-                                                      setState(() {
-                                                        _isLoading = false;
-                                                      });
+                                                      setState(() =>
+                                                          _isLoading = false);
                                                     }
                                                   }
                                                 },
                                                 child: Container(
-                                                  width: media.width * 0.25,
-                                                  height: media.width * 0.125,
+                                                  width: context.w * 0.25,
+                                                  height: context.w * 0.125,
                                                   decoration: const BoxDecoration(
                                                       image: DecorationImage(
                                                           image: AssetImage(
@@ -907,7 +889,7 @@ class _InvoiceState extends State<Invoice> {
                                                           fit: BoxFit.contain)),
                                                 ),
                                               ))
-                                          : Container(),
+                                          : const SizedBox.shrink(),
                                     ],
                                   ),
                                 ),
@@ -918,7 +900,7 @@ class _InvoiceState extends State<Invoice> {
                       ],
                     ),
                   ))
-                : Container(),
+                : const SizedBox.shrink(),
 
             if (_isLoading == true) const Positioned(child: Loading())
           ],

@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -50,7 +44,6 @@ class _NotificationPageState extends State<NotificationPage> {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Material(
         child: ValueListenableBuilder(
             valueListenable: valueNotifierHome.value,
@@ -61,11 +54,11 @@ class _NotificationPageState extends State<NotificationPage> {
                     : TextDirection.ltr,
                 child: Stack(children: [
                   Container(
-                    height: media.height * 1,
-                    width: media.width * 1,
+                    height: context.h * 1,
+                    width: context.w * 1,
                     color: page,
-                    padding: EdgeInsets.fromLTRB(media.width * 0.05,
-                        media.width * 0.05, media.width * 0.05, 0),
+                    padding: EdgeInsets.fromLTRB(context.w * 0.05,
+                        context.w * 0.05, context.w * 0.05, 0),
                     child: Column(
                       children: [
                         SizedBox(height: MediaQuery.of(context).padding.top),
@@ -73,14 +66,14 @@ class _NotificationPageState extends State<NotificationPage> {
                           children: [
                             Container(
                               padding:
-                                  EdgeInsets.only(bottom: media.width * 0.05),
-                              width: media.width * 1,
+                                  EdgeInsets.only(bottom: context.w * 0.05),
+                              width: context.w * 1,
                               alignment: Alignment.center,
                               child: Text(
                                 languages[choosenLanguage]['text_notification']
                                     .toString(),
                                 style: GoogleFonts.roboto(
-                                    fontSize: media.width * twenty,
+                                    fontSize: context.w * twenty,
                                     fontWeight: FontWeight.w600,
                                     color: textColor),
                               ),
@@ -115,12 +108,12 @@ class _NotificationPageState extends State<NotificationPage> {
                                                   },
                                                   child: Container(
                                                     margin: EdgeInsets.only(
-                                                        top: media.width * 0.02,
+                                                        top: context.w * 0.02,
                                                         bottom:
-                                                            media.width * 0.02),
-                                                    width: media.width * 0.9,
+                                                            context.w * 0.02),
+                                                    width: context.w * 0.9,
                                                     padding: EdgeInsets.all(
-                                                        media.width * 0.025),
+                                                        context.w * 0.025),
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: borderLines,
@@ -132,11 +125,10 @@ class _NotificationPageState extends State<NotificationPage> {
                                                     child: Row(
                                                       children: [
                                                         Container(
-                                                            height: media
-                                                                    .width *
+                                                            height: context.w *
                                                                 0.1067,
                                                             width:
-                                                                media.width *
+                                                                context.w *
                                                                     0.1067,
                                                             decoration: BoxDecoration(
                                                                 borderRadius:
@@ -152,8 +144,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                                             child: const Icon(Icons
                                                                 .notifications)),
                                                         SizedBox(
-                                                          width: media.width *
-                                                              0.025,
+                                                          width:
+                                                              context.w * 0.025,
                                                         ),
                                                         Column(
                                                           crossAxisAlignment:
@@ -161,9 +153,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                                                   .start,
                                                           children: [
                                                             SizedBox(
-                                                              width:
-                                                                  media.width *
-                                                                      0.55,
+                                                              width: context.w *
+                                                                  0.55,
                                                               child: Text(
                                                                 notificationHistory[
                                                                             i][
@@ -173,8 +164,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                                                     TextOverflow
                                                                         .ellipsis,
                                                                 style: GoogleFonts.roboto(
-                                                                    fontSize: media
-                                                                            .width *
+                                                                    fontSize: context
+                                                                            .w *
                                                                         fourteen,
                                                                     color:
                                                                         textColor,
@@ -185,13 +176,12 @@ class _NotificationPageState extends State<NotificationPage> {
                                                             ),
                                                             SizedBox(
                                                               height:
-                                                                  media.width *
+                                                                  context.w *
                                                                       0.01,
                                                             ),
                                                             SizedBox(
-                                                              width:
-                                                                  media.width *
-                                                                      0.55,
+                                                              width: context.w *
+                                                                  0.55,
                                                               child: Text(
                                                                 notificationHistory[
                                                                             i]
@@ -204,7 +194,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                                                     GoogleFonts
                                                                         .roboto(
                                                                   fontSize:
-                                                                      media.width *
+                                                                      context.w *
                                                                           ten,
                                                                   color:
                                                                       hintColor,
@@ -222,9 +212,9 @@ class _NotificationPageState extends State<NotificationPage> {
                                                             Container(
                                                                 alignment: Alignment
                                                                     .centerRight,
-                                                                width: media
-                                                                        .width *
-                                                                    0.15,
+                                                                width:
+                                                                    context.w *
+                                                                        0.15,
                                                                 child:
                                                                     IconButton(
                                                                   onPressed:
@@ -256,15 +246,15 @@ class _NotificationPageState extends State<NotificationPage> {
                                   : Column(
                                       children: [
                                         Container(
-                                          height: media.width * 0.7,
-                                          width: media.width * 0.7,
+                                          height: context.w * 0.7,
+                                          width: context.w * 0.7,
                                           decoration: const BoxDecoration(
                                               image: DecorationImage(
                                                   image: AssetImage(
                                                       'assets/images/notification_bg.png'),
                                                   fit: BoxFit.contain)),
                                         ),
-                                        Text(
+                                        const Text(
                                           'No Data Found',
                                           style: TextStyle(
                                             fontSize: 20,
@@ -283,20 +273,20 @@ class _NotificationPageState extends State<NotificationPage> {
                       ? Positioned(
                           top: 0,
                           child: Container(
-                            height: media.height * 1,
-                            width: media.width * 1,
+                            height: context.h * 1,
+                            width: context.w * 1,
                             color: Colors.transparent.withOpacity(0.6),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SizedBox(
-                                  width: media.width * 0.9,
+                                  width: context.w * 0.9,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Container(
-                                          height: media.height * 0.1,
-                                          width: media.width * 0.1,
+                                          height: context.h * 0.1,
+                                          width: context.w * 0.1,
                                           decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               color: page),
@@ -313,8 +303,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                   ),
                                 ),
                                 Container(
-                                  padding: EdgeInsets.all(media.width * 0.05),
-                                  width: media.width * 0.9,
+                                  padding: EdgeInsets.all(context.w * 0.05),
+                                  width: context.w * 0.9,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: page),
@@ -325,19 +315,19 @@ class _NotificationPageState extends State<NotificationPage> {
                                                 ['title']
                                             .toString(),
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * sixteen,
+                                            fontSize: context.w * sixteen,
                                             color: textColor,
                                             fontWeight: FontWeight.w600),
                                       ),
                                       SizedBox(
-                                        height: media.width * 0.05,
+                                        height: context.w * 0.05,
                                       ),
                                       Text(
                                         notificationHistory[showinfovalue!]
                                                 ['body']
                                             .toString(),
                                         style: GoogleFonts.roboto(
-                                          fontSize: media.width * fourteen,
+                                          fontSize: context.w * fourteen,
                                           color: hintColor,
                                         ),
                                       )
@@ -352,15 +342,15 @@ class _NotificationPageState extends State<NotificationPage> {
                       ? Positioned(
                           top: 0,
                           child: Container(
-                            height: media.height * 1,
-                            width: media.width * 1,
+                            height: context.h * 1,
+                            width: context.w * 1,
                             color: Colors.transparent.withOpacity(0.6),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  padding: EdgeInsets.all(media.width * 0.05),
-                                  width: media.width * 0.9,
+                                  padding: EdgeInsets.all(context.w * 0.05),
+                                  width: context.w * 0.9,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                       color: page),
@@ -370,12 +360,12 @@ class _NotificationPageState extends State<NotificationPage> {
                                         languages[choosenLanguage]
                                             ['text_delete_notification'],
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * sixteen,
+                                            fontSize: context.w * sixteen,
                                             color: textColor,
                                             fontWeight: FontWeight.w600),
                                       ),
                                       SizedBox(
-                                        height: media.width * 0.05,
+                                        height: context.w * 0.05,
                                       ),
                                       Row(
                                         mainAxisAlignment:
@@ -391,7 +381,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                               text: languages[choosenLanguage]
                                                   ['text_no']),
                                           SizedBox(
-                                            width: media.width * 0.05,
+                                            width: context.w * 0.05,
                                           ),
                                           Button(
                                               onTap: () async {
@@ -431,12 +421,12 @@ class _NotificationPageState extends State<NotificationPage> {
                       : Container(),
                   (showToastbool == true)
                       ? Positioned(
-                          bottom: media.height * 0.2,
-                          left: media.width * 0.2,
-                          right: media.width * 0.2,
+                          bottom: context.h * 0.2,
+                          left: context.w * 0.2,
+                          right: context.w * 0.2,
                           child: Container(
                             alignment: Alignment.center,
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.transparent.withOpacity(0.6)),
@@ -444,7 +434,7 @@ class _NotificationPageState extends State<NotificationPage> {
                               languages[choosenLanguage]
                                   ['text_notification_deleted'],
                               style: GoogleFonts.roboto(
-                                  fontSize: media.width * twelve,
+                                  fontSize: context.w * twelve,
                                   color: Colors.white),
                             ),
                           ))

@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import '../styles/styles.dart';
+import 'package:awii/core/constants/exports.dart';
 
 //button style
 
@@ -13,15 +12,16 @@ class Button extends StatefulWidget {
   dynamic width;
   dynamic height;
 
-  // ignore: use_key_in_widget_constructors
-  Button(
-      {required this.onTap,
-      required this.text,
-      this.color,
-      this.borcolor,
-      this.textcolor,
-      this.width,
-      this.height});
+  Button({
+    Key? key,
+    required this.onTap,
+    required this.text,
+    this.color,
+    this.borcolor,
+    this.textcolor,
+    this.width,
+    this.height,
+  }) : super(key: key);
 
   @override
   State<Button> createState() => _ButtonState();

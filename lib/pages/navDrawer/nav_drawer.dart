@@ -1,18 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/NavigatorPages/about.dart';
-import 'package:awii/pages/NavigatorPages/editprofile.dart';
-import 'package:awii/pages/NavigatorPages/faq.dart';
-import 'package:awii/pages/NavigatorPages/favourite.dart';
-import 'package:awii/pages/NavigatorPages/history.dart';
-import 'package:awii/pages/NavigatorPages/makecomplaint.dart';
-import 'package:awii/pages/NavigatorPages/notification.dart';
-import 'package:awii/pages/NavigatorPages/referral.dart';
-import 'package:awii/pages/NavigatorPages/selectlanguage.dart';
-import 'package:awii/pages/NavigatorPages/sos.dart';
-import 'package:awii/pages/onTripPage/map_page.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class NavDrawer extends StatefulWidget {
   const NavDrawer({Key? key}) : super(key: key);
@@ -23,10 +9,9 @@ class NavDrawer extends StatefulWidget {
 class _NavDrawerState extends State<NavDrawer> {
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Container(
       color: Colors.transparent,
-      width: media.width * 0.8,
+      width: context.w * 0.8,
       child: Directionality(
         textDirection: (languageDirection == 'rtl')
             ? TextDirection.rtl
@@ -39,22 +24,21 @@ class _NavDrawerState extends State<NavDrawer> {
                 children: [
                   Container(
                     padding: EdgeInsets.only(
-                        top: media.width * 0.07 +
+                        top: context.w * 0.07 +
                             MediaQuery.of(context).padding.top,
-                        bottom: media.width * 0.015 +
+                        bottom: context.w * 0.015 +
                             MediaQuery.of(context).padding.top,
-                        left: media.width * 0.05,
-                        right: media.width * 0.01),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    width: media.width,
+                        left: context.w * 0.05,
+                        right: context.w * 0.01),
+                    decoration:
+                        BoxDecoration(color: Theme.of(context).primaryColor),
+                    width: context.w,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          height: media.width * 0.175,
-                          width: media.width * 0.175,
+                          height: context.w * 0.175,
+                          width: context.w * 0.175,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
@@ -62,24 +46,22 @@ class _NavDrawerState extends State<NavDrawer> {
                                       userDetails['profile_picture']),
                                   fit: BoxFit.cover)),
                         ),
-                        SizedBox(
-                          width: media.width * 0.030,
-                        ),
+                        SizedBox(width: context.w * 0.030),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              width: media.width * 0.45,
+                              width: context.w * 0.45,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   SizedBox(
-                                    width: media.width * 0.3,
+                                    width: context.w * 0.3,
                                     child: Text(
                                       userDetails['name'],
                                       style: TextStyle(
-                                          fontSize: media.width * eighteen,
+                                          fontSize: context.w * eighteen,
                                           color: page,
                                           fontWeight: FontWeight.w600),
                                       maxLines: 1,
@@ -98,7 +80,7 @@ class _NavDrawerState extends State<NavDrawer> {
                                     },
                                     child: Icon(
                                       Icons.edit,
-                                      size: media.width * eighteen,
+                                      size: context.w * eighteen,
                                       color: page,
                                     ),
                                   )
@@ -106,14 +88,14 @@ class _NavDrawerState extends State<NavDrawer> {
                               ),
                             ),
                             SizedBox(
-                              height: media.width * 0.01,
+                              height: context.w * 0.01,
                             ),
                             SizedBox(
-                              width: media.width * 0.5,
+                              width: context.w * 0.5,
                               child: Text(
                                 userDetails['email'],
                                 style: TextStyle(
-                                    fontSize: media.width * fourteen,
+                                    fontSize: context.w * fourteen,
                                     color: page),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -125,8 +107,8 @@ class _NavDrawerState extends State<NavDrawer> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: media.width * 0.05),
-                    width: media.width * 0.7,
+                    padding: EdgeInsets.only(top: context.w * 0.05),
+                    width: context.w * 0.7,
                     child: Column(
                       children: [
                         //notification
@@ -150,25 +132,24 @@ class _NavDrawerState extends State<NavDrawer> {
                                   children: [
                                     Container(
                                       padding:
-                                          EdgeInsets.all(media.width * 0.025),
+                                          EdgeInsets.all(context.w * 0.025),
                                       child: Row(
                                         children: [
                                           const Icon(
                                               Icons.notifications_outlined,
                                               size: 26),
                                           SizedBox(
-                                            width: media.width * 0.030,
+                                            width: context.w * 0.030,
                                           ),
                                           SizedBox(
-                                            width: media.width * 0.49,
+                                            width: context.w * 0.49,
                                             child: Text(
                                               languages[choosenLanguage]
                                                       ['text_notification']
                                                   .toString(),
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                  fontSize:
-                                                      media.width * sixteen,
+                                                  fontSize: context.w * sixteen,
                                                   color: textColor),
                                             ),
                                           )
@@ -190,7 +171,7 @@ class _NavDrawerState extends State<NavDrawer> {
                                                   .toString(),
                                               style: TextStyle(
                                                   fontSize:
-                                                      media.width * fourteen,
+                                                      context.w * fourteen,
                                                   color: buttonText),
                                             ),
                                           )
@@ -208,21 +189,21 @@ class _NavDrawerState extends State<NavDrawer> {
                                     builder: (context) => const History()));
                           },
                           child: Container(
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             child: Row(
                               children: [
-                                Icon(Icons.history, size: 26),
+                                const Icon(Icons.history, size: 26),
                                 SizedBox(
-                                  width: media.width * 0.030,
+                                  width: context.w * 0.030,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.55,
+                                  width: context.w * 0.55,
                                   child: Text(
                                     languages[choosenLanguage]
                                         ['text_enable_history'],
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: textColor),
                                   ),
                                 )
@@ -240,21 +221,21 @@ class _NavDrawerState extends State<NavDrawer> {
                                     builder: (context) => const WalletPage()));
                           },
                           child: Container(
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             child: Row(
                               children: [
                                 Icon(Icons.wallet_outlined, size: 26),
                                 SizedBox(
-                                  width: media.width * 0.030,
+                                  width: context.w * 0.030,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.55,
+                                  width: context.w * 0.55,
                                   child: Text(
                                     languages[choosenLanguage]
                                         ['text_enable_wallet'],
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: textColor),
                                   ),
                                 )
@@ -273,21 +254,21 @@ class _NavDrawerState extends State<NavDrawer> {
                                         const ReferralPage()));
                           },
                           child: Container(
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             child: Row(
                               children: [
-                                Icon(Icons.person_add_outlined, size: 26),
+                                const Icon(Icons.person_add_outlined, size: 26),
                                 SizedBox(
-                                  width: media.width * 0.030,
+                                  width: context.w * 0.030,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.55,
+                                  width: context.w * 0.55,
                                   child: Text(
                                     languages[choosenLanguage]
                                         ['text_enable_referal'],
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: textColor),
                                   ),
                                 )
@@ -305,21 +286,21 @@ class _NavDrawerState extends State<NavDrawer> {
                                     builder: (context) => const Favorite()));
                           },
                           child: Container(
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             child: Row(
                               children: [
                                 const Icon(Icons.favorite_border, size: 26),
                                 SizedBox(
-                                  width: media.width * 0.030,
+                                  width: context.w * 0.030,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.55,
+                                  width: context.w * 0.55,
                                   child: Text(
                                     languages[choosenLanguage]
                                         ['text_favourites'],
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: textColor),
                                   ),
                                 )
@@ -337,20 +318,20 @@ class _NavDrawerState extends State<NavDrawer> {
                                     builder: (context) => const Faq()));
                           },
                           child: Container(
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             child: Row(
                               children: [
-                                Icon(Icons.warning_amber, size: 26),
+                                const Icon(Icons.warning_amber, size: 26),
                                 SizedBox(
-                                  width: media.width * 0.030,
+                                  width: context.w * 0.030,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.55,
+                                  width: context.w * 0.55,
                                   child: Text(
                                     languages[choosenLanguage]['text_faq'],
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: textColor),
                                   ),
                                 )
@@ -371,20 +352,20 @@ class _NavDrawerState extends State<NavDrawer> {
                             }
                           },
                           child: Container(
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             child: Row(
                               children: [
-                                Icon(Icons.emergency_outlined, size: 26),
+                                const Icon(Icons.emergency_outlined, size: 26),
                                 SizedBox(
-                                  width: media.width * 0.030,
+                                  width: context.w * 0.030,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.55,
+                                  width: context.w * 0.55,
                                   child: Text(
                                     languages[choosenLanguage]['text_sos'],
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: textColor),
                                   ),
                                 )
@@ -406,21 +387,21 @@ class _NavDrawerState extends State<NavDrawer> {
                             }
                           },
                           child: Container(
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             child: Row(
                               children: [
-                                Icon(Icons.language_outlined, size: 26),
+                                const Icon(Icons.language_outlined, size: 26),
                                 SizedBox(
-                                  width: media.width * 0.030,
+                                  width: context.w * 0.030,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.55,
+                                  width: context.w * 0.55,
                                   child: Text(
                                     languages[choosenLanguage]
                                         ['text_change_language'],
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: textColor),
                                   ),
                                 )
@@ -442,21 +423,21 @@ class _NavDrawerState extends State<NavDrawer> {
                             }
                           },
                           child: Container(
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             child: Row(
                               children: [
-                                Icon(Icons.report_outlined, size: 26),
+                                const Icon(Icons.report_outlined, size: 26),
                                 SizedBox(
-                                  width: media.width * 0.030,
+                                  width: context.w * 0.030,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.55,
+                                  width: context.w * 0.55,
                                   child: Text(
                                     languages[choosenLanguage]
                                         ['text_make_complaints'],
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: textColor),
                                   ),
                                 )
@@ -473,23 +454,23 @@ class _NavDrawerState extends State<NavDrawer> {
                                     builder: (context) => const About()));
                           },
                           child: Container(
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             child: Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.info_outline,
                                   size: 26,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.030,
+                                  width: context.w * 0.030,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.55,
+                                  width: context.w * 0.55,
                                   child: Text(
                                     languages[choosenLanguage]['text_about'],
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: textColor),
                                   ),
                                 )
@@ -508,24 +489,24 @@ class _NavDrawerState extends State<NavDrawer> {
                             Navigator.pop(context);
                           },
                           child: Container(
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             child: Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.delete_forever_outlined,
                                   size: 26,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.030,
+                                  width: context.w * 0.030,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.55,
+                                  width: context.w * 0.55,
                                   child: Text(
                                     languages[choosenLanguage]
                                         ['text_delete_account'],
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: textColor),
                                   ),
                                 )
@@ -544,20 +525,20 @@ class _NavDrawerState extends State<NavDrawer> {
                             Navigator.pop(context);
                           },
                           child: Container(
-                            padding: EdgeInsets.all(media.width * 0.025),
+                            padding: EdgeInsets.all(context.w * 0.025),
                             child: Row(
                               children: [
-                                Icon(Icons.logout_outlined, size: 26),
+                                const Icon(Icons.logout_outlined, size: 26),
                                 SizedBox(
-                                  width: media.width * 0.030,
+                                  width: context.w * 0.030,
                                 ),
                                 SizedBox(
-                                  width: media.width * 0.55,
+                                  width: context.w * 0.55,
                                   child: Text(
                                     languages[choosenLanguage]['text_logout'],
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: textColor),
                                   ),
                                 )

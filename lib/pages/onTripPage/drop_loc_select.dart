@@ -670,8 +670,7 @@ class _DropLocationState extends State<DropLocation>
                                                 ),
                                               ),
                                               SizedBox(
-                                                height: media.width * 0.03,
-                                              ),
+                                                  height: media.width * 0.03),
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
@@ -682,10 +681,8 @@ class _DropLocationState extends State<DropLocation>
                                                         Theme.of(context)
                                                             .primaryColor,
                                                     onChanged: (val) {
-                                                      print(userDetails);
-                                                      setState(() {
-                                                        isMe = val;
-                                                      });
+                                                      setState(
+                                                          () => isMe = val);
                                                       if (val) {
                                                         setState(() {
                                                           buyerName.text =
@@ -716,7 +713,7 @@ class _DropLocationState extends State<DropLocation>
                                                       }
                                                     },
                                                   ),
-                                                  Text('My Self',
+                                                  const Text('My Self',
                                                       style: TextStyle(
                                                         fontSize: 14,
                                                         fontWeight:

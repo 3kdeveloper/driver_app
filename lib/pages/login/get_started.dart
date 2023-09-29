@@ -1,15 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/referralcode/referral_code.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
-import './login.dart';
-import 'dart:io';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({Key? key}) : super(key: key);
@@ -27,15 +16,14 @@ class _GetStartedState extends State<GetStarted> {
   var verifyEmailError = '';
   var _error = '';
 
-  TextEditingController emailText =
-      TextEditingController(); //email textediting controller
-  TextEditingController nameText =
-      TextEditingController(); //name textediting controller
+  late final TextEditingController _emailText;
+  late final TextEditingController _nameText;
 
   ImagePicker picker = ImagePicker();
   bool _pickImage = false;
   String _permission = '';
 
+  //TODO Recreate this method again
   getGalleryPermission() async {
     var status = await Permission.photos.status;
     if (status != PermissionStatus.granted) {
@@ -63,9 +51,7 @@ class _GetStartedState extends State<GetStarted> {
         _pickImage = false;
       });
     } else {
-      setState(() {
-        _permission = 'noPhotos';
-      });
+      setState(() => _permission = 'noPhotos');
     }
   }
 
@@ -95,14 +81,21 @@ class _GetStartedState extends State<GetStarted> {
 
   @override
   void initState() {
+    _emailText = TextEditingController();
+    _nameText = TextEditingController();
     proImageFile1 = null;
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
+  void dispose() {
+    _emailText.dispose();
+    _nameText.dispose();
+    super.dispose();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Material(
       child: Scaffold(
         body: Directionality(
@@ -113,15 +106,15 @@ class _GetStartedState extends State<GetStarted> {
             children: [
               Container(
                 padding: EdgeInsets.only(
-                    left: media.width * 0.08, right: media.width * 0.08),
-                height: media.height * 1,
-                width: media.width * 1,
+                    left: context.w * 0.08, right: context.w * 0.08),
+                height: context.h * 1,
+                width: context.w * 1,
                 color: page,
                 child: Column(
                   children: [
                     Container(
-                        height: media.height * 0.12,
-                        width: media.width * 1,
+                        height: context.h * 0.12,
+                        width: context.w * 1,
                         color: topBar,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -138,40 +131,32 @@ class _GetStartedState extends State<GetStarted> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          SizedBox(height: context.h * 0.04),
                           SizedBox(
-                            height: media.height * 0.04,
-                          ),
-                          SizedBox(
-                            width: media.width * 1,
+                            width: context.w * 1,
                             child: Text(
                               languages[choosenLanguage]['text_get_started'],
                               style: GoogleFonts.roboto(
-                                  fontSize: media.width * twentyeight,
+                                  fontSize: context.w * twentyeight,
                                   fontWeight: FontWeight.bold,
                                   color: textColor),
                             ),
                           ),
-                          SizedBox(
-                            height: media.height * 0.012,
-                          ),
+                          SizedBox(height: context.h * 0.012),
                           Text(
                             languages[choosenLanguage]['text_fill_form'],
                             style: GoogleFonts.roboto(
-                                fontSize: media.width * sixteen,
+                                fontSize: context.w * sixteen,
                                 color: textColor.withOpacity(0.3)),
                           ),
-                          SizedBox(height: media.height * 0.04),
+                          SizedBox(height: context.h * 0.04),
                           Center(
                             child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  _pickImage = true;
-                                });
-                              },
+                              onTap: () => setState(() => _pickImage = true),
                               child: proImageFile1 != null
                                   ? Container(
-                                      height: media.width * 0.4,
-                                      width: media.width * 0.4,
+                                      height: context.w * 0.4,
+                                      width: context.w * 0.4,
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           color: backgroundColor,
@@ -182,8 +167,8 @@ class _GetStartedState extends State<GetStarted> {
                                     )
                                   : Container(
                                       alignment: Alignment.center,
-                                      height: media.width * 0.4,
-                                      width: media.width * 0.4,
+                                      height: context.w * 0.4,
+                                      width: context.w * 0.4,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: backgroundColor,
@@ -192,41 +177,33 @@ class _GetStartedState extends State<GetStarted> {
                                         languages[choosenLanguage]
                                             ['text_add_photo'],
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * fourteen,
+                                            fontSize: context.w * fourteen,
                                             color: textColor),
                                       ),
                                     ),
                             ),
                           ),
-                          SizedBox(height: media.height * 0.04),
+                          SizedBox(height: context.h * 0.04),
                           InputField(
                             icon: Icons.person_outline_rounded,
                             text: languages[choosenLanguage]['text_name'],
                             onTap: (val) {
                               setState(() {
-                                name = nameText.text;
+                                name = _nameText.text;
                               });
                             },
-                            textController: nameText,
+                            textController: _nameText,
                           ),
-                          SizedBox(
-                            height: media.height * 0.012,
-                          ),
+                          SizedBox(height: context.h * 0.012),
                           InputField(
                             icon: Icons.email_outlined,
                             text: languages[choosenLanguage]['text_email'],
-                            onTap: (val) {
-                              setState(() {
-                                email = emailText.text;
-                              });
-                            },
-                            textController: emailText,
+                            onTap: (val) =>
+                                setState(() => email = _emailText.text),
+                            textController: _emailText,
                             color: (verifyEmailError == '') ? null : Colors.red,
                           ),
-                          SizedBox(
-                            height: media.height * 0.012,
-                          ),
-
+                          SizedBox(height: context.h * 0.012),
                           Container(
                             decoration: BoxDecoration(
                                 border: Border(
@@ -244,12 +221,10 @@ class _GetStartedState extends State<GetStarted> {
                                       Text(
                                         countries[phcode]['dial_code'],
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * sixteen,
+                                            fontSize: context.w * sixteen,
                                             color: textColor),
                                       ),
-                                      const SizedBox(
-                                        width: 2,
-                                      ),
+                                      const SizedBox(width: 2),
                                       const Icon(Icons.keyboard_arrow_down)
                                     ],
                                   ),
@@ -258,7 +233,7 @@ class _GetStartedState extends State<GetStarted> {
                                 Text(
                                   phnumber,
                                   style: GoogleFonts.roboto(
-                                      fontSize: media.width * sixteen,
+                                      fontSize: context.w * sixteen,
                                       color: textColor,
                                       letterSpacing: 2),
                                 )
@@ -268,36 +243,33 @@ class _GetStartedState extends State<GetStarted> {
                           //email already exist error
                           (_error != '')
                               ? Container(
-                                  width: media.width * 0.8,
+                                  width: context.w * 0.8,
                                   margin:
-                                      EdgeInsets.only(top: media.height * 0.03),
+                                      EdgeInsets.only(top: context.h * 0.03),
                                   alignment: Alignment.center,
                                   child: Text(
                                     _error,
                                     style: GoogleFonts.roboto(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: Colors.red),
                                   ),
                                 )
-                              : Container(),
+                              : const SizedBox.shrink(),
 
-                          SizedBox(
-                            height: media.height * 0.065,
-                          ),
-                          (nameText.text.isNotEmpty &&
-                                  emailText.text.isNotEmpty)
+                          SizedBox(height: context.h * 0.065),
+                          (_nameText.text.isNotEmpty &&
+                                  _emailText.text.isNotEmpty)
                               ? Container(
-                                  width: media.width * 1,
+                                  width: context.w * 1,
                                   alignment: Alignment.center,
                                   child: Button(
                                       onTap: () async {
                                         String pattern =
                                             r"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])*$";
                                         RegExp regex = RegExp(pattern);
-                                        if (regex.hasMatch(emailText.text)) {
+                                        if (regex.hasMatch(_emailText.text)) {
                                           FocusManager.instance.primaryFocus
                                               ?.unfocus();
-
                                           setState(() {
                                             verifyEmailError = '';
                                             _error = '';
@@ -305,7 +277,6 @@ class _GetStartedState extends State<GetStarted> {
                                           });
                                           //validate email already exist
                                           var result = await validateEmail();
-
                                           if (result == 'success') {
                                             setState(() {
                                               verifyEmailError = '';
@@ -316,9 +287,8 @@ class _GetStartedState extends State<GetStarted> {
                                               //referral page
                                               navigate();
                                             } else {
-                                              setState(() {
-                                                _error = register.toString();
-                                              });
+                                              setState(() =>
+                                                  _error = register.toString());
                                             }
                                           } else {
                                             setState(() {
@@ -327,9 +297,7 @@ class _GetStartedState extends State<GetStarted> {
                                               _error = result.toString();
                                             });
                                           }
-                                          setState(() {
-                                            _loading = false;
-                                          });
+                                          setState(() => _loading = false);
                                         } else {
                                           setState(() {
                                             verifyEmailError =
@@ -342,7 +310,7 @@ class _GetStartedState extends State<GetStarted> {
                                       },
                                       text: languages[choosenLanguage]
                                           ['text_next']))
-                              : Container()
+                              : const SizedBox.shrink()
                         ],
                       ),
                     )),
@@ -354,21 +322,17 @@ class _GetStartedState extends State<GetStarted> {
                   ? Positioned(
                       bottom: 0,
                       child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            _pickImage = false;
-                          });
-                        },
+                        onTap: () => setState(() => _pickImage = false),
                         child: Container(
-                          height: media.height * 1,
-                          width: media.width * 1,
+                          height: context.h * 1,
+                          width: context.w * 1,
                           color: Colors.transparent.withOpacity(0.6),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Container(
-                                padding: EdgeInsets.all(media.width * 0.05),
-                                width: media.width * 1,
+                                padding: EdgeInsets.all(context.w * 0.05),
+                                width: context.w * 1,
                                 decoration: BoxDecoration(
                                     borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(25),
@@ -381,17 +345,15 @@ class _GetStartedState extends State<GetStarted> {
                                 child: Column(
                                   children: [
                                     Container(
-                                      height: media.width * 0.02,
-                                      width: media.width * 0.15,
+                                      height: context.w * 0.02,
+                                      width: context.w * 0.15,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(
-                                            media.width * 0.01),
+                                            context.w * 0.01),
                                         color: Colors.grey,
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: media.width * 0.05,
-                                    ),
+                                    SizedBox(height: context.w * 0.05),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -403,8 +365,8 @@ class _GetStartedState extends State<GetStarted> {
                                                 pickImageFromCamera();
                                               },
                                               child: Container(
-                                                  height: media.width * 0.171,
-                                                  width: media.width * 0.171,
+                                                  height: context.w * 0.171,
+                                                  width: context.w * 0.171,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color: borderLines,
@@ -414,17 +376,15 @@ class _GetStartedState extends State<GetStarted> {
                                                               12)),
                                                   child: Icon(
                                                     Icons.camera_alt_outlined,
-                                                    size: media.width * 0.064,
+                                                    size: context.w * 0.064,
                                                   )),
                                             ),
-                                            SizedBox(
-                                              height: media.width * 0.01,
-                                            ),
+                                            SizedBox(height: context.w * 0.01),
                                             Text(
                                               languages[choosenLanguage]
                                                   ['text_camera'],
                                               style: GoogleFonts.roboto(
-                                                  fontSize: media.width * ten,
+                                                  fontSize: context.w * ten,
                                                   color:
                                                       const Color(0xff666666)),
                                             )
@@ -433,12 +393,11 @@ class _GetStartedState extends State<GetStarted> {
                                         Column(
                                           children: [
                                             InkWell(
-                                              onTap: () {
-                                                pickImageFromGallery();
-                                              },
+                                              onTap: () =>
+                                                  pickImageFromGallery(),
                                               child: Container(
-                                                  height: media.width * 0.171,
-                                                  width: media.width * 0.171,
+                                                  height: context.w * 0.171,
+                                                  width: context.w * 0.171,
                                                   decoration: BoxDecoration(
                                                       border: Border.all(
                                                           color: borderLines,
@@ -448,17 +407,15 @@ class _GetStartedState extends State<GetStarted> {
                                                               12)),
                                                   child: Icon(
                                                     Icons.image_outlined,
-                                                    size: media.width * 0.064,
+                                                    size: context.w * 0.064,
                                                   )),
                                             ),
-                                            SizedBox(
-                                              height: media.width * 0.01,
-                                            ),
+                                            SizedBox(height: context.w * 0.01),
                                             Text(
                                               languages[choosenLanguage]
                                                   ['text_gallery'],
                                               style: GoogleFonts.roboto(
-                                                  fontSize: media.width * ten,
+                                                  fontSize: context.w * ten,
                                                   color:
                                                       const Color(0xff666666)),
                                             )
@@ -473,33 +430,31 @@ class _GetStartedState extends State<GetStarted> {
                           ),
                         ),
                       ))
-                  : Container(),
+                  : const SizedBox.shrink(),
 
               //permission denied popup
               (_permission != '')
                   ? Positioned(
                       child: Container(
-                      height: media.height * 1,
-                      width: media.width * 1,
+                      height: context.h * 1,
+                      width: context.w * 1,
                       color: Colors.transparent.withOpacity(0.6),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: media.width * 0.9,
+                            width: context.w * 0.9,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      _permission = '';
-                                      _pickImage = false;
-                                    });
-                                  },
+                                  onTap: () => setState(() {
+                                    _permission = '';
+                                    _pickImage = false;
+                                  }),
                                   child: Container(
-                                    height: media.width * 0.1,
-                                    width: media.width * 0.1,
+                                    height: context.w * 0.1,
+                                    width: context.w * 0.1,
                                     decoration: BoxDecoration(
                                         shape: BoxShape.circle, color: page),
                                     child: const Icon(Icons.cancel_outlined),
@@ -508,12 +463,10 @@ class _GetStartedState extends State<GetStarted> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: media.width * 0.05,
-                          ),
+                          SizedBox(height: context.w * 0.05),
                           Container(
-                            padding: EdgeInsets.all(media.width * 0.05),
-                            width: media.width * 0.9,
+                            padding: EdgeInsets.all(context.w * 0.05),
+                            width: context.w * 0.9,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
                                 color: page,
@@ -526,7 +479,7 @@ class _GetStartedState extends State<GetStarted> {
                             child: Column(
                               children: [
                                 SizedBox(
-                                    width: media.width * 0.8,
+                                    width: context.w * 0.8,
                                     child: Text(
                                       (_permission == 'noPhotos')
                                           ? languages[choosenLanguage]
@@ -534,11 +487,11 @@ class _GetStartedState extends State<GetStarted> {
                                           : languages[choosenLanguage]
                                               ['text_open_camera_setting'],
                                       style: GoogleFonts.roboto(
-                                          fontSize: media.width * sixteen,
+                                          fontSize: context.w * sixteen,
                                           color: textColor,
                                           fontWeight: FontWeight.w600),
                                     )),
-                                SizedBox(height: media.width * 0.05),
+                                SizedBox(height: context.w * 0.05),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -551,7 +504,7 @@ class _GetStartedState extends State<GetStarted> {
                                           languages[choosenLanguage]
                                               ['text_open_settings'],
                                           style: GoogleFonts.roboto(
-                                              fontSize: media.width * sixteen,
+                                              fontSize: context.w * sixteen,
                                               color: buttonColor,
                                               fontWeight: FontWeight.w600),
                                         )),
@@ -568,7 +521,7 @@ class _GetStartedState extends State<GetStarted> {
                                           languages[choosenLanguage]
                                               ['text_done'],
                                           style: GoogleFonts.roboto(
-                                              fontSize: media.width * sixteen,
+                                              fontSize: context.w * sixteen,
                                               color: buttonColor,
                                               fontWeight: FontWeight.w600),
                                         ))
@@ -580,12 +533,12 @@ class _GetStartedState extends State<GetStarted> {
                         ],
                       ),
                     ))
-                  : Container(),
+                  : const SizedBox.shrink(),
 
               //loader
               (_loading == true)
                   ? const Positioned(top: 0, child: Loading())
-                  : Container()
+                  : const SizedBox.shrink()
             ],
           ),
         ),

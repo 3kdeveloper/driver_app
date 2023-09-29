@@ -49,7 +49,7 @@ class _OtpState extends State<Otp> {
       if (userRequestData.isNotEmpty && userRequestData['is_completed'] == 1) {
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => const Invoice()),
+            MaterialPageRoute(builder: (context) => const InvoiceScreen()),
             (route) => false);
       } else if (userRequestData.isNotEmpty &&
           userRequestData['is_completed'] != 1) {

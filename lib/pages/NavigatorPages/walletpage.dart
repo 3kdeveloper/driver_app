@@ -1,16 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/NavigatorPages/flutterwavepage.dart';
-import 'package:awii/pages/NavigatorPages/paystackpayment.dart';
-import 'package:awii/pages/NavigatorPages/selectwallet.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/noInternet/nointernet.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
-import 'razorpaypage.dart';
-import 'cashfreepage.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class WalletPage extends StatefulWidget {
   const WalletPage({Key? key}) : super(key: key);
@@ -74,7 +62,6 @@ class _WalletPageState extends State<WalletPage> {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Material(
       child: ValueListenableBuilder(
           valueListenable: valueNotifierBook.value,
@@ -88,10 +75,10 @@ class _WalletPageState extends State<WalletPage> {
                   alignment: Alignment.center,
                   children: [
                     Container(
-                      padding: EdgeInsets.fromLTRB(media.width * 0.05,
-                          media.width * 0.05, media.width * 0.05, 0),
-                      height: media.height * 1,
-                      width: media.width * 1,
+                      padding: EdgeInsets.fromLTRB(context.w * 0.05,
+                          context.w * 0.05, context.w * 0.05, 0),
+                      height: context.h * 1,
+                      width: context.w * 1,
                       color: page,
                       child: Column(
                         children: [
@@ -100,14 +87,14 @@ class _WalletPageState extends State<WalletPage> {
                             children: [
                               Container(
                                 padding:
-                                    EdgeInsets.only(bottom: media.width * 0.05),
-                                width: media.width * 1,
+                                    EdgeInsets.only(bottom: context.w * 0.05),
+                                width: context.w * 1,
                                 alignment: Alignment.center,
                                 child: Text(
                                   languages[choosenLanguage]
                                       ['text_enable_wallet'],
                                   style: GoogleFonts.roboto(
-                                      fontSize: media.width * twenty,
+                                      fontSize: context.w * twenty,
                                       fontWeight: FontWeight.w600,
                                       color: textColor),
                                 ),
@@ -121,7 +108,7 @@ class _WalletPageState extends State<WalletPage> {
                             ],
                           ),
                           SizedBox(
-                            height: media.width * 0.05,
+                            height: context.w * 0.05,
                           ),
                           (walletBalance.isNotEmpty)
                               ? Column(
@@ -130,22 +117,22 @@ class _WalletPageState extends State<WalletPage> {
                                       languages[choosenLanguage]
                                           ['text_availablebalance'],
                                       style: GoogleFonts.roboto(
-                                          fontSize: media.width * twelve,
+                                          fontSize: context.w * twelve,
                                           color: textColor),
                                     ),
                                     SizedBox(
-                                      height: media.width * 0.01,
+                                      height: context.w * 0.01,
                                     ),
                                     Text(
                                       walletBalance['currency_symbol'] +
                                           walletBalance['wallet_balance']
                                               .toString(),
                                       style: GoogleFonts.roboto(
-                                          fontSize: media.width * fourty,
+                                          fontSize: context.w * fourty,
                                           fontWeight: FontWeight.w600),
                                     ),
                                     SizedBox(
-                                      height: media.width * 0.05,
+                                      height: context.w * 0.05,
                                     ),
                                     Button(
                                       onTap: () {
@@ -155,25 +142,25 @@ class _WalletPageState extends State<WalletPage> {
                                       },
                                       text: languages[choosenLanguage]
                                           ['text_share_money'],
-                                      width: media.width * 0.3,
+                                      width: context.w * 0.3,
                                     ),
                                     SizedBox(
-                                      height: media.width * 0.05,
+                                      height: context.w * 0.05,
                                     ),
                                     SizedBox(
-                                      width: media.width * 0.9,
+                                      width: context.w * 0.9,
                                       child: Text(
                                         languages[choosenLanguage]
                                             ['text_recenttransactions'],
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * fourteen,
+                                            fontSize: context.w * fourteen,
                                             color: textColor,
                                             fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                   ],
                                 )
-                              : Container(),
+                              : const SizedBox.shrink(),
                           Expanded(
                               child: SingleChildScrollView(
                             physics: const BouncingScrollPhysics(),
@@ -188,12 +175,12 @@ class _WalletPageState extends State<WalletPage> {
                                                   i,
                                                   Container(
                                                     margin: EdgeInsets.only(
-                                                        top: media.width * 0.02,
+                                                        top: context.w * 0.02,
                                                         bottom:
-                                                            media.width * 0.02),
-                                                    width: media.width * 0.9,
+                                                            context.w * 0.02),
+                                                    width: context.w * 0.9,
                                                     padding: EdgeInsets.all(
-                                                        media.width * 0.025),
+                                                        context.w * 0.025),
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
                                                             color: borderLines,
@@ -205,9 +192,9 @@ class _WalletPageState extends State<WalletPage> {
                                                     child: Row(
                                                       children: [
                                                         Container(
-                                                          height: media.width *
+                                                          height: context.w *
                                                               0.1067,
-                                                          width: media.width *
+                                                          width: context.w *
                                                               0.1067,
                                                           decoration: BoxDecoration(
                                                               borderRadius:
@@ -227,16 +214,16 @@ class _WalletPageState extends State<WalletPage> {
                                                                 ? '+'
                                                                 : '-',
                                                             style: GoogleFonts.roboto(
-                                                                fontSize: media
-                                                                        .width *
+                                                                fontSize: context
+                                                                        .w *
                                                                     twentyfour,
                                                                 color:
                                                                     textColor),
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          width: media.width *
-                                                              0.025,
+                                                          width:
+                                                              context.w * 0.025,
                                                         ),
                                                         Column(
                                                           children: [
@@ -244,8 +231,8 @@ class _WalletPageState extends State<WalletPage> {
                                                               walletHistory[i]
                                                                   ['remarks'],
                                                               style: GoogleFonts.roboto(
-                                                                  fontSize: media
-                                                                          .width *
+                                                                  fontSize: context
+                                                                          .w *
                                                                       fourteen,
                                                                   color:
                                                                       textColor,
@@ -255,7 +242,7 @@ class _WalletPageState extends State<WalletPage> {
                                                             ),
                                                             SizedBox(
                                                               height:
-                                                                  media.width *
+                                                                  context.w *
                                                                       0.01,
                                                             ),
                                                             Text(
@@ -263,9 +250,9 @@ class _WalletPageState extends State<WalletPage> {
                                                                   'created_at'],
                                                               style: GoogleFonts
                                                                   .roboto(
-                                                                fontSize: media
-                                                                        .width *
-                                                                    ten,
+                                                                fontSize:
+                                                                    context.w *
+                                                                        ten,
                                                                 color:
                                                                     hintColor,
                                                               ),
@@ -289,9 +276,9 @@ class _WalletPageState extends State<WalletPage> {
                                                                       .toString(),
                                                               style: GoogleFonts
                                                                   .roboto(
-                                                                fontSize: media
-                                                                        .width *
-                                                                    twelve,
+                                                                fontSize:
+                                                                    context.w *
+                                                                        twelve,
                                                                 color: const Color(
                                                                     0xffE60000),
                                                               ),
@@ -311,11 +298,11 @@ class _WalletPageState extends State<WalletPage> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               SizedBox(
-                                                height: media.width * 0.05,
+                                                height: context.w * 0.05,
                                               ),
                                               Container(
-                                                height: media.width * 0.7,
-                                                width: media.width * 0.7,
+                                                height: context.w * 0.7,
+                                                width: context.w * 0.7,
                                                 decoration: const BoxDecoration(
                                                     image: DecorationImage(
                                                         image: AssetImage(
@@ -323,16 +310,16 @@ class _WalletPageState extends State<WalletPage> {
                                                         fit: BoxFit.contain)),
                                               ),
                                               SizedBox(
-                                                height: media.width * 0.02,
+                                                height: context.w * 0.02,
                                               ),
                                               SizedBox(
-                                                width: media.width * 0.9,
+                                                width: context.w * 0.9,
                                                 child: Text(
                                                   languages[choosenLanguage]
                                                       ['text_noDataFound'],
                                                   style: GoogleFonts.roboto(
                                                       fontSize:
-                                                          media.width * sixteen,
+                                                          context.w * sixteen,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: textColor),
@@ -341,7 +328,7 @@ class _WalletPageState extends State<WalletPage> {
                                               )
                                             ],
                                           )
-                                        : Container(),
+                                        : const SizedBox.shrink(),
 
                                 //load more button
                                 (walletPages.isNotEmpty)
@@ -364,9 +351,9 @@ class _WalletPageState extends State<WalletPage> {
                                             },
                                             child: Container(
                                               padding: EdgeInsets.all(
-                                                  media.width * 0.025),
+                                                  context.w * 0.025),
                                               margin: EdgeInsets.only(
-                                                  bottom: media.width * 0.05),
+                                                  bottom: context.w * 0.05),
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
@@ -379,13 +366,13 @@ class _WalletPageState extends State<WalletPage> {
                                                     ['text_loadmore'],
                                                 style: GoogleFonts.roboto(
                                                     fontSize:
-                                                        media.width * sixteen,
+                                                        context.w * sixteen,
                                                     color: textColor),
                                               ),
                                             ),
                                           )
-                                        : Container()
-                                    : Container()
+                                        : const SizedBox.shrink()
+                                    : const SizedBox.shrink()
                               ],
                             ),
                           )),
@@ -394,8 +381,8 @@ class _WalletPageState extends State<WalletPage> {
                           (_addPayment == false)
                               ? Container(
                                   padding: EdgeInsets.only(
-                                      top: media.width * 0.05,
-                                      bottom: media.width * 0.05),
+                                      top: context.w * 0.05,
+                                      bottom: context.w * 0.05),
                                   child: Button(
                                       onTap: () {
                                         if (_addPayment == false) {
@@ -407,7 +394,7 @@ class _WalletPageState extends State<WalletPage> {
                                       text: languages[choosenLanguage]
                                           ['text_addmoney']),
                                 )
-                              : Container()
+                              : const SizedBox.shrink()
                         ],
                       ),
                     ),
@@ -417,18 +404,17 @@ class _WalletPageState extends State<WalletPage> {
                         ? Positioned(
                             bottom: 0,
                             child: Container(
-                              height: media.height * 1,
-                              width: media.width * 1,
+                              height: context.h * 1,
+                              width: context.w * 1,
                               color: Colors.transparent.withOpacity(0.6),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(
-                                        bottom: media.width * 0.05),
-                                    width: media.width * 0.9,
-                                    padding:
-                                        EdgeInsets.all(media.width * 0.025),
+                                        bottom: context.w * 0.05),
+                                    width: context.w * 0.9,
+                                    padding: EdgeInsets.all(context.w * 0.025),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                         border: Border.all(
@@ -436,7 +422,7 @@ class _WalletPageState extends State<WalletPage> {
                                         color: page),
                                     child: Column(children: [
                                       Container(
-                                        height: media.width * 0.128,
+                                        height: context.w * 0.128,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(12),
@@ -446,8 +432,8 @@ class _WalletPageState extends State<WalletPage> {
                                         child: Row(
                                           children: [
                                             Container(
-                                                width: media.width * 0.1,
-                                                height: media.width * 0.128,
+                                                width: context.w * 0.1,
+                                                height: context.w * 0.128,
                                                 decoration: const BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.only(
@@ -463,17 +449,17 @@ class _WalletPageState extends State<WalletPage> {
                                                       'currency_symbol'],
                                                   style: GoogleFonts.roboto(
                                                       fontSize:
-                                                          media.width * fifteen,
+                                                          context.w * fifteen,
                                                       color: textColor,
                                                       fontWeight:
                                                           FontWeight.w600),
                                                 )),
                                             SizedBox(
-                                              width: media.width * 0.05,
+                                              width: context.w * 0.05,
                                             ),
                                             Container(
-                                              height: media.width * 0.128,
-                                              width: media.width * 0.6,
+                                              height: context.w * 0.128,
+                                              width: context.w * 0.6,
                                               alignment: Alignment.center,
                                               child: TextField(
                                                 controller: addMoneyController,
@@ -491,7 +477,7 @@ class _WalletPageState extends State<WalletPage> {
                                                           ['text_enteramount'],
                                                   hintStyle: GoogleFonts.roboto(
                                                       fontSize:
-                                                          media.width * twelve,
+                                                          context.w * twelve,
                                                       color: hintColor),
                                                 ),
                                                 maxLines: 1,
@@ -501,7 +487,7 @@ class _WalletPageState extends State<WalletPage> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: media.width * 0.05,
+                                        height: context.w * 0.05,
                                       ),
                                       Row(
                                         mainAxisAlignment:
@@ -515,8 +501,8 @@ class _WalletPageState extends State<WalletPage> {
                                               });
                                             },
                                             child: Container(
-                                              height: media.width * 0.11,
-                                              width: media.width * 0.17,
+                                              height: context.w * 0.11,
+                                              width: context.w * 0.17,
                                               decoration: BoxDecoration(
                                                   border: Border.all(
                                                       color: borderLines,
@@ -531,7 +517,7 @@ class _WalletPageState extends State<WalletPage> {
                                                     '100',
                                                 style: GoogleFonts.roboto(
                                                     fontSize:
-                                                        media.width * twelve,
+                                                        context.w * twelve,
                                                     color: textColor,
                                                     fontWeight:
                                                         FontWeight.w600),
@@ -539,7 +525,7 @@ class _WalletPageState extends State<WalletPage> {
                                             ),
                                           ),
                                           SizedBox(
-                                            width: media.width * 0.05,
+                                            width: context.w * 0.05,
                                           ),
                                           InkWell(
                                             onTap: () {
@@ -549,8 +535,8 @@ class _WalletPageState extends State<WalletPage> {
                                               });
                                             },
                                             child: Container(
-                                              height: media.width * 0.11,
-                                              width: media.width * 0.17,
+                                              height: context.w * 0.11,
+                                              width: context.w * 0.17,
                                               decoration: BoxDecoration(
                                                   border: Border.all(
                                                       color: borderLines,
@@ -565,7 +551,7 @@ class _WalletPageState extends State<WalletPage> {
                                                     '500',
                                                 style: GoogleFonts.roboto(
                                                     fontSize:
-                                                        media.width * twelve,
+                                                        context.w * twelve,
                                                     color: textColor,
                                                     fontWeight:
                                                         FontWeight.w600),
@@ -573,7 +559,7 @@ class _WalletPageState extends State<WalletPage> {
                                             ),
                                           ),
                                           SizedBox(
-                                            width: media.width * 0.05,
+                                            width: context.w * 0.05,
                                           ),
                                           InkWell(
                                             onTap: () {
@@ -584,8 +570,8 @@ class _WalletPageState extends State<WalletPage> {
                                               });
                                             },
                                             child: Container(
-                                              height: media.width * 0.11,
-                                              width: media.width * 0.17,
+                                              height: context.w * 0.11,
+                                              width: context.w * 0.17,
                                               decoration: BoxDecoration(
                                                   border: Border.all(
                                                       color: borderLines,
@@ -600,7 +586,7 @@ class _WalletPageState extends State<WalletPage> {
                                                     '1000',
                                                 style: GoogleFonts.roboto(
                                                     fontSize:
-                                                        media.width * twelve,
+                                                        context.w * twelve,
                                                     color: textColor,
                                                     fontWeight:
                                                         FontWeight.w600),
@@ -610,7 +596,7 @@ class _WalletPageState extends State<WalletPage> {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: media.width * 0.1,
+                                        height: context.w * 0.1,
                                       ),
                                       Row(
                                         mainAxisAlignment:
@@ -629,7 +615,7 @@ class _WalletPageState extends State<WalletPage> {
                                             },
                                             text: languages[choosenLanguage]
                                                 ['text_cancel'],
-                                            width: media.width * 0.4,
+                                            width: context.w * 0.4,
                                           ),
                                           Button(
                                             onTap: () async {
@@ -646,7 +632,7 @@ class _WalletPageState extends State<WalletPage> {
                                             },
                                             text: languages[choosenLanguage]
                                                 ['text_addmoney'],
-                                            width: media.width * 0.4,
+                                            width: context.w * 0.4,
                                           ),
                                         ],
                                       )
@@ -655,24 +641,24 @@ class _WalletPageState extends State<WalletPage> {
                                 ],
                               ),
                             ))
-                        : Container(),
+                        : const SizedBox.shrink(),
 
                     //choose payment method
                     (_choosePayment == true)
                         ? Positioned(
                             child: Container(
-                            height: media.height * 1,
-                            width: media.width * 1,
+                            height: context.h * 1,
+                            width: context.w * 1,
                             color: Colors.transparent.withOpacity(0.6),
                             child: SingleChildScrollView(
                               child: SizedBox(
-                                height: media.height * 1,
-                                width: media.width * 1,
+                                height: context.h * 1,
+                                width: context.w * 1,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SizedBox(
-                                      width: media.width * 0.8,
+                                      width: context.w * 0.8,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
@@ -685,8 +671,8 @@ class _WalletPageState extends State<WalletPage> {
                                               });
                                             },
                                             child: Container(
-                                              height: media.height * 0.05,
-                                              width: media.height * 0.05,
+                                              height: context.h * 0.05,
+                                              width: context.h * 0.05,
                                               decoration: BoxDecoration(
                                                 color: page,
                                                 shape: BoxShape.circle,
@@ -698,12 +684,11 @@ class _WalletPageState extends State<WalletPage> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(height: media.width * 0.025),
+                                    SizedBox(height: context.w * 0.025),
                                     Container(
-                                      padding:
-                                          EdgeInsets.all(media.width * 0.05),
-                                      width: media.width * 0.8,
-                                      height: media.height * 0.6,
+                                      padding: EdgeInsets.all(context.w * 0.05),
+                                      width: context.w * 0.8,
+                                      height: context.h * 0.6,
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(12),
@@ -711,18 +696,18 @@ class _WalletPageState extends State<WalletPage> {
                                       child: Column(
                                         children: [
                                           SizedBox(
-                                              width: media.width * 0.7,
+                                              width: context.w * 0.7,
                                               child: Text(
                                                 languages[choosenLanguage]
                                                     ['text_choose_payment'],
                                                 style: GoogleFonts.roboto(
                                                     fontSize:
-                                                        media.width * eighteen,
+                                                        context.w * eighteen,
                                                     fontWeight:
                                                         FontWeight.w600),
                                               )),
                                           SizedBox(
-                                            height: media.width * 0.05,
+                                            height: context.w * 0.05,
                                           ),
                                           Expanded(
                                             child: SingleChildScrollView(
@@ -733,14 +718,15 @@ class _WalletPageState extends State<WalletPage> {
                                                   (walletBalance['stripe'] ==
                                                           true)
                                                       ? Container(
-                                                          margin: EdgeInsets.only(
-                                                              bottom:
-                                                                  media.width *
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  bottom: context
+                                                                          .w *
                                                                       0.025),
                                                           alignment:
                                                               Alignment.center,
                                                           width:
-                                                              media.width * 0.7,
+                                                              context.w * 0.7,
                                                           child: InkWell(
                                                             onTap: () async {
                                                               var val = await Navigator.push(
@@ -763,11 +749,10 @@ class _WalletPageState extends State<WalletPage> {
                                                               }
                                                             },
                                                             child: Container(
-                                                              width:
-                                                                  media.width *
-                                                                      0.25,
+                                                              width: context.w *
+                                                                  0.25,
                                                               height:
-                                                                  media.width *
+                                                                  context.w *
                                                                       0.125,
                                                               decoration: const BoxDecoration(
                                                                   image: DecorationImage(
@@ -777,18 +762,19 @@ class _WalletPageState extends State<WalletPage> {
                                                                           .contain)),
                                                             ),
                                                           ))
-                                                      : Container(),
+                                                      : const SizedBox.shrink(),
                                                   (walletBalance['paystack'] ==
                                                           true)
                                                       ? Container(
                                                           alignment:
                                                               Alignment.center,
-                                                          margin: EdgeInsets.only(
-                                                              bottom:
-                                                                  media.width *
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  bottom: context
+                                                                          .w *
                                                                       0.025),
                                                           width:
-                                                              media.width * 0.7,
+                                                              context.w * 0.7,
                                                           child: InkWell(
                                                             onTap: () async {
                                                               var val = await Navigator.push(
@@ -812,11 +798,10 @@ class _WalletPageState extends State<WalletPage> {
                                                               }
                                                             },
                                                             child: Container(
-                                                              width:
-                                                                  media.width *
-                                                                      0.25,
+                                                              width: context.w *
+                                                                  0.25,
                                                               height:
-                                                                  media.width *
+                                                                  context.w *
                                                                       0.125,
                                                               decoration: const BoxDecoration(
                                                                   image: DecorationImage(
@@ -826,19 +811,19 @@ class _WalletPageState extends State<WalletPage> {
                                                                           .contain)),
                                                             ),
                                                           ))
-                                                      : Container(),
+                                                      : const SizedBox.shrink(),
                                                   (walletBalance[
                                                               'flutter_wave'] ==
                                                           true)
                                                       ? Container(
                                                           margin: EdgeInsets.only(
                                                               bottom:
-                                                                  media.width *
+                                                                  context.w *
                                                                       0.025),
                                                           alignment:
                                                               Alignment.center,
                                                           width:
-                                                              media.width * 0.7,
+                                                              context.w * 0.7,
                                                           child: InkWell(
                                                             onTap: () async {
                                                               var val = await Navigator.push(
@@ -861,11 +846,10 @@ class _WalletPageState extends State<WalletPage> {
                                                               }
                                                             },
                                                             child: Container(
-                                                              width:
-                                                                  media.width *
-                                                                      0.25,
+                                                              width: context.w *
+                                                                  0.25,
                                                               height:
-                                                                  media.width *
+                                                                  context.w *
                                                                       0.125,
                                                               decoration: const BoxDecoration(
                                                                   image: DecorationImage(
@@ -875,18 +859,19 @@ class _WalletPageState extends State<WalletPage> {
                                                                           .contain)),
                                                             ),
                                                           ))
-                                                      : Container(),
+                                                      : const SizedBox.shrink(),
                                                   (walletBalance['razor_pay'] ==
                                                           true)
                                                       ? Container(
-                                                          margin: EdgeInsets.only(
-                                                              bottom:
-                                                                  media.width *
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  bottom: context
+                                                                          .w *
                                                                       0.025),
                                                           alignment:
                                                               Alignment.center,
                                                           width:
-                                                              media.width * 0.7,
+                                                              context.w * 0.7,
                                                           child: InkWell(
                                                             onTap: () async {
                                                               var val = await Navigator.push(
@@ -909,11 +894,10 @@ class _WalletPageState extends State<WalletPage> {
                                                               }
                                                             },
                                                             child: Container(
-                                                              width:
-                                                                  media.width *
-                                                                      0.25,
+                                                              width: context.w *
+                                                                  0.25,
                                                               height:
-                                                                  media.width *
+                                                                  context.w *
                                                                       0.125,
                                                               decoration: const BoxDecoration(
                                                                   image: DecorationImage(
@@ -923,18 +907,19 @@ class _WalletPageState extends State<WalletPage> {
                                                                           .contain)),
                                                             ),
                                                           ))
-                                                      : Container(),
+                                                      : const SizedBox.shrink(),
                                                   (walletBalance['cash_free'] ==
                                                           true)
                                                       ? Container(
-                                                          margin: EdgeInsets.only(
-                                                              bottom:
-                                                                  media.width *
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  bottom: context
+                                                                          .w *
                                                                       0.025),
                                                           alignment:
                                                               Alignment.center,
                                                           width:
-                                                              media.width * 0.7,
+                                                              context.w * 0.7,
                                                           child: InkWell(
                                                             onTap: () async {
                                                               var val = await Navigator.push(
@@ -957,11 +942,10 @@ class _WalletPageState extends State<WalletPage> {
                                                               }
                                                             },
                                                             child: Container(
-                                                              width:
-                                                                  media.width *
-                                                                      0.25,
+                                                              width: context.w *
+                                                                  0.25,
                                                               height:
-                                                                  media.width *
+                                                                  context.w *
                                                                       0.125,
                                                               decoration: const BoxDecoration(
                                                                   image: DecorationImage(
@@ -971,7 +955,7 @@ class _WalletPageState extends State<WalletPage> {
                                                                           .contain)),
                                                             ),
                                                           ))
-                                                      : Container(),
+                                                      : const SizedBox.shrink(),
                                                 ],
                                               ),
                                             ),
@@ -984,27 +968,26 @@ class _WalletPageState extends State<WalletPage> {
                               ),
                             ),
                           ))
-                        : Container(),
+                        : const SizedBox.shrink(),
 
                     (ispop == true)
                         ? Positioned(
                             top: 0,
                             child: Container(
-                              height: media.height * 1,
-                              width: media.width * 1,
+                              height: context.h * 1,
+                              width: context.w * 1,
                               color: Colors.transparent.withOpacity(0.6),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Container(
-                                      padding:
-                                          EdgeInsets.all(media.width * 0.05),
+                                      padding: EdgeInsets.all(context.w * 0.05),
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(12),
                                           color: page),
-                                      width: media.width * 0.8,
+                                      width: context.w * 0.8,
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
@@ -1045,7 +1028,7 @@ class _WalletPageState extends State<WalletPage> {
                                             // maxLength: countries[phcode]
                                             //     ['dial_max_length'],
                                             style: GoogleFonts.roboto(
-                                                fontSize: media.width * sixteen,
+                                                fontSize: context.w * sixteen,
                                                 color: textColor,
                                                 letterSpacing: 1),
                                             keyboardType: TextInputType.number,
@@ -1055,8 +1038,7 @@ class _WalletPageState extends State<WalletPage> {
                                                       ['text_phone_number'],
                                               counterText: '',
                                               hintStyle: GoogleFonts.roboto(
-                                                  fontSize:
-                                                      media.width * sixteen,
+                                                  fontSize: context.w * sixteen,
                                                   color: textColor
                                                       .withOpacity(0.7)),
                                               focusedBorder:
@@ -1076,7 +1058,7 @@ class _WalletPageState extends State<WalletPage> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: media.width * 0.05,
+                                            height: context.w * 0.05,
                                           ),
                                           error == true
                                               ? Text(
@@ -1084,17 +1066,17 @@ class _WalletPageState extends State<WalletPage> {
                                                   style: const TextStyle(
                                                       color: Colors.red),
                                                 )
-                                              : Container(),
+                                              : const SizedBox.shrink(),
                                           SizedBox(
-                                            height: media.width * 0.05,
+                                            height: context.w * 0.05,
                                           ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
                                             children: [
                                               Button(
-                                                  width: media.width * 0.2,
-                                                  height: media.width * 0.09,
+                                                  width: context.w * 0.2,
+                                                  height: context.w * 0.09,
                                                   onTap: () {
                                                     setState(() {
                                                       ispop = false;
@@ -1108,12 +1090,10 @@ class _WalletPageState extends State<WalletPage> {
                                                   text:
                                                       languages[choosenLanguage]
                                                           ['text_close']),
-                                              SizedBox(
-                                                width: media.width * 0.05,
-                                              ),
+                                              SizedBox(width: context.w * 0.05),
                                               Button(
-                                                  width: media.width * 0.2,
-                                                  height: media.width * 0.09,
+                                                  width: context.w * 0.2,
+                                                  height: context.w * 0.09,
                                                   onTap: () async {
                                                     setState(() {
                                                       _isLoading = true;
@@ -1173,7 +1153,7 @@ class _WalletPageState extends State<WalletPage> {
                               ),
                             ),
                           )
-                        : Container(),
+                        : const SizedBox.shrink(),
                     //no internet
                     (internet == false)
                         ? Positioned(
@@ -1188,12 +1168,12 @@ class _WalletPageState extends State<WalletPage> {
                                 });
                               },
                             ))
-                        : Container(),
+                        : const SizedBox.shrink(),
 
                     //loader
                     (_isLoading == true)
                         ? const Positioned(child: Loading())
-                        : Container()
+                        : const SizedBox.shrink()
                   ],
                 ),
               ),

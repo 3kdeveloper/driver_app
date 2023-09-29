@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/noInternet/nointernet.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:contacts_service/contacts_service.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
+import 'package:awii/core/constants/exports.dart';
 
 // ignore: must_be_immutable
 class PickContact extends StatefulWidget {
@@ -83,7 +74,6 @@ class _PickContactState extends State<PickContact> {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Material(
       child: Directionality(
         textDirection: (languageDirection == 'rtl')
@@ -92,25 +82,25 @@ class _PickContactState extends State<PickContact> {
         child: Stack(
           children: [
             Container(
-              height: media.height * 1,
-              width: media.width * 1,
+              height: context.h * 1,
+              width: context.w * 1,
               color: page,
               padding: EdgeInsets.only(
-                  left: media.width * 0.05, right: media.width * 0.05),
+                  left: context.w * 0.05, right: context.w * 0.05),
               child: Column(children: [
                 SizedBox(
-                    height: MediaQuery.of(context).padding.top +
-                        media.width * 0.05),
+                    height:
+                        MediaQuery.of(context).padding.top + context.w * 0.05),
                 Stack(
                   children: [
                     Container(
-                      padding: EdgeInsets.only(bottom: media.width * 0.05),
-                      width: media.width * 1,
+                      padding: EdgeInsets.only(bottom: context.w * 0.05),
+                      width: context.w * 1,
                       alignment: Alignment.center,
                       child: Text(
                         'Pick Contacts',
                         style: GoogleFonts.roboto(
-                            fontSize: media.width * twenty,
+                            fontSize: context.w * twenty,
                             fontWeight: FontWeight.w600,
                             color: textColor),
                       ),
@@ -137,7 +127,7 @@ class _PickContactState extends State<PickContact> {
                   ],
                 ),
                 SizedBox(
-                  height: media.width * 0.05,
+                  height: context.w * 0.05,
                 ),
                 Expanded(
                   child: SingleChildScrollView(
@@ -159,7 +149,7 @@ class _PickContactState extends State<PickContact> {
                                     ? Container()
                                     : Container(
                                         padding:
-                                            EdgeInsets.all(media.width * 0.025),
+                                            EdgeInsets.all(context.w * 0.025),
                                         child: InkWell(
                                           onTap: () {
                                             setState(() {
@@ -173,7 +163,7 @@ class _PickContactState extends State<PickContact> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               SizedBox(
-                                                width: media.width * 0.7,
+                                                width: context.w * 0.7,
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -184,31 +174,28 @@ class _PickContactState extends State<PickContact> {
                                                       overflow:
                                                           TextOverflow.ellipsis,
                                                       style: GoogleFonts.roboto(
-                                                          fontSize:
-                                                              media.width *
-                                                                  fourteen,
+                                                          fontSize: context.w *
+                                                              fourteen,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           color: textColor),
                                                     ),
                                                     SizedBox(
-                                                      height:
-                                                          media.width * 0.01,
+                                                      height: context.w * 0.01,
                                                     ),
                                                     Text(
                                                       contacts[i]['phone'],
                                                       style: GoogleFonts.roboto(
-                                                          fontSize:
-                                                              media.width *
-                                                                  twelve,
+                                                          fontSize: context.w *
+                                                              twelve,
                                                           color: textColor),
                                                     )
                                                   ],
                                                 ),
                                               ),
                                               Container(
-                                                height: media.width * 0.05,
-                                                width: media.width * 0.05,
+                                                height: context.w * 0.05,
+                                                width: context.w * 0.05,
                                                 decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
                                                     border: Border.all(
@@ -220,9 +207,8 @@ class _PickContactState extends State<PickContact> {
                                                         contacts[i]['name'])
                                                     ? Container(
                                                         height:
-                                                            media.width * 0.03,
-                                                        width:
-                                                            media.width * 0.03,
+                                                            context.w * 0.03,
+                                                        width: context.w * 0.03,
                                                         decoration:
                                                             const BoxDecoration(
                                                                 shape: BoxShape
@@ -245,8 +231,7 @@ class _PickContactState extends State<PickContact> {
                 (pickedName != '')
                     ? Container(
                         padding: EdgeInsets.only(
-                            top: media.width * 0.05,
-                            bottom: media.width * 0.05),
+                            top: context.w * 0.05, bottom: context.w * 0.05),
                         child: Button(
                             onTap: () async {
                               if (widget.from == 2) {
@@ -275,14 +260,14 @@ class _PickContactState extends State<PickContact> {
             (_contactDenied == true)
                 ? Positioned(
                     child: Container(
-                    height: media.height * 1,
-                    width: media.width * 1,
+                    height: context.h * 1,
+                    width: context.w * 1,
                     color: Colors.transparent.withOpacity(0.6),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          width: media.width * 0.9,
+                          width: context.w * 0.9,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -294,8 +279,8 @@ class _PickContactState extends State<PickContact> {
                                   Navigator.pop(context, false);
                                 },
                                 child: Container(
-                                  height: media.width * 0.1,
-                                  width: media.width * 0.1,
+                                  height: context.w * 0.1,
+                                  width: context.w * 0.1,
                                   decoration: BoxDecoration(
                                       shape: BoxShape.circle, color: page),
                                   child: const Icon(Icons.cancel_outlined),
@@ -305,11 +290,11 @@ class _PickContactState extends State<PickContact> {
                           ),
                         ),
                         SizedBox(
-                          height: media.width * 0.05,
+                          height: context.w * 0.05,
                         ),
                         Container(
-                          padding: EdgeInsets.all(media.width * 0.05),
-                          width: media.width * 0.9,
+                          padding: EdgeInsets.all(context.w * 0.05),
+                          width: context.w * 0.9,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: page,
@@ -322,16 +307,16 @@ class _PickContactState extends State<PickContact> {
                           child: Column(
                             children: [
                               SizedBox(
-                                  width: media.width * 0.8,
+                                  width: context.w * 0.8,
                                   child: Text(
                                     languages[choosenLanguage]
                                         ['text_open_contact_setting'],
                                     style: GoogleFonts.roboto(
-                                        fontSize: media.width * sixteen,
+                                        fontSize: context.w * sixteen,
                                         color: textColor,
                                         fontWeight: FontWeight.w600),
                                   )),
-                              SizedBox(height: media.width * 0.05),
+                              SizedBox(height: context.w * 0.05),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -344,7 +329,7 @@ class _PickContactState extends State<PickContact> {
                                         languages[choosenLanguage]
                                             ['text_open_settings'],
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * sixteen,
+                                            fontSize: context.w * sixteen,
                                             color: buttonColor,
                                             fontWeight: FontWeight.w600),
                                       )),
@@ -358,7 +343,7 @@ class _PickContactState extends State<PickContact> {
                                       child: Text(
                                         languages[choosenLanguage]['text_done'],
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * sixteen,
+                                            fontSize: context.w * sixteen,
                                             color: buttonColor,
                                             fontWeight: FontWeight.w600),
                                       ))

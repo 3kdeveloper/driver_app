@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/onTripPage/booking_confirmation.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class ChooseGoods extends StatefulWidget {
   const ChooseGoods({Key? key}) : super(key: key);
@@ -41,7 +34,6 @@ class _ChooseGoodsState extends State<ChooseGoods> {
   @override
   Widget build(BuildContext context) {
     print(vehicleIconType);
-    var media = MediaQuery.of(context).size;
     return Material(
       child: Directionality(
         textDirection: (languageDirection == 'rtl')
@@ -51,26 +43,26 @@ class _ChooseGoodsState extends State<ChooseGoods> {
           body: Stack(
             children: [
               Container(
-                height: media.height * 1,
-                width: media.width * 1,
+                height: context.h * 1,
+                width: context.w * 1,
                 color: page,
                 padding: EdgeInsets.only(
-                    left: media.width * 0.05, right: media.width * 0.05),
+                    left: context.w * 0.05, right: context.w * 0.05),
                 child: Column(
                   children: [
                     SizedBox(
                         height: MediaQuery.of(context).padding.top +
-                            media.width * 0.05),
+                            context.w * 0.05),
                     Stack(
                       children: [
                         Container(
-                          padding: EdgeInsets.only(bottom: media.width * 0.05),
-                          width: media.width * 1,
+                          padding: EdgeInsets.only(bottom: context.w * 0.05),
+                          width: context.w * 1,
                           alignment: Alignment.center,
                           child: Text(
                             languages[choosenLanguage]['text_choose_goods'],
                             style: GoogleFonts.poppins(
-                                fontSize: media.width * twenty,
+                                fontSize: context.w * twenty,
                                 fontWeight: FontWeight.w600,
                                 color: textColor),
                           ),
@@ -84,7 +76,7 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                       ],
                     ),
                     SizedBox(
-                      height: media.width * 0.05,
+                      height: context.w * 0.05,
                     ),
                     Expanded(
                         child: SingleChildScrollView(
@@ -95,9 +87,8 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                 return MapEntry(
                                     i,
                                     Container(
-                                      width: media.width * 0.9,
-                                      padding:
-                                          EdgeInsets.all(media.width * 0.02),
+                                      width: context.w * 0.9,
+                                      padding: EdgeInsets.all(context.w * 0.02),
                                       child: InkWell(
                                         onTap: () {
                                           setState(() {
@@ -114,7 +105,7 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             SizedBox(
-                                              width: media.width * 0.6,
+                                              width: context.w * 0.6,
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
@@ -150,8 +141,7 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                                           ),
                                                   ),
                                                   SizedBox(
-                                                      width:
-                                                          media.width * 0.05),
+                                                      width: context.w * 0.05),
                                                   Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
@@ -162,9 +152,9 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                                             ['goods_type_name'],
                                                         style:
                                                             GoogleFonts.poppins(
-                                                                fontSize: media
-                                                                        .width *
-                                                                    sixteen),
+                                                                fontSize:
+                                                                    context.w *
+                                                                        sixteen),
                                                         maxLines: 1,
                                                         overflow: TextOverflow
                                                             .ellipsis,
@@ -178,9 +168,9 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                                           ? Text(
                                                               goodsSize,
                                                               style: GoogleFonts.poppins(
-                                                                  fontSize: media
-                                                                          .width *
-                                                                      twelve,
+                                                                  fontSize:
+                                                                      context.w *
+                                                                          twelve,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w300),
@@ -189,15 +179,16 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                                                   TextOverflow
                                                                       .ellipsis,
                                                             )
-                                                          : Container()
+                                                          : const SizedBox
+                                                              .shrink()
                                                     ],
                                                   ),
                                                 ],
                                               ),
                                             ),
                                             Container(
-                                              height: media.width * 0.05,
-                                              width: media.width * 0.05,
+                                              height: context.w * 0.05,
+                                              width: context.w * 0.05,
                                               decoration: BoxDecoration(
                                                   border: Border.all(
                                                       color: Colors.black),
@@ -207,9 +198,8 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                                       goodsTypeList[i]['id']
                                                           .toString())
                                                   ? Container(
-                                                      height:
-                                                          media.width * 0.03,
-                                                      width: media.width * 0.03,
+                                                      height: context.w * 0.03,
+                                                      width: context.w * 0.03,
                                                       decoration:
                                                           const BoxDecoration(
                                                               shape: BoxShape
@@ -217,7 +207,7 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                                               color:
                                                                   Colors.black),
                                                     )
-                                                  : Container(),
+                                                  : const SizedBox.shrink(),
                                             )
                                           ],
                                         ),
@@ -228,12 +218,11 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                               .toList()),
                     )),
                     SizedBox(
-                      height: media.width * 0.025,
+                      height: context.w * 0.025,
                     ),
                     (_selGoods != null)
                         ? Container(
-                            margin:
-                                EdgeInsets.only(bottom: media.width * 0.025),
+                            margin: EdgeInsets.only(bottom: context.w * 0.025),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -253,8 +242,8 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                         }
                                       },
                                       child: Container(
-                                        height: media.width * 0.04,
-                                        width: media.width * 0.04,
+                                        height: context.w * 0.04,
+                                        width: context.w * 0.04,
                                         decoration: BoxDecoration(
                                             border:
                                                 Border.all(color: Colors.black),
@@ -264,32 +253,32 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                                 languages[choosenLanguage]
                                                     ['text_loose'])
                                             ? Container(
-                                                height: media.width * 0.02,
-                                                width: media.width * 0.02,
+                                                height: context.w * 0.02,
+                                                width: context.w * 0.02,
                                                 decoration: const BoxDecoration(
                                                     shape: BoxShape.circle,
                                                     color: Colors.black),
                                               )
-                                            : Container(),
+                                            : const SizedBox.shrink(),
                                       ),
                                     ),
                                     SizedBox(
-                                      width: media.width * 0.02,
+                                      width: context.w * 0.02,
                                     ),
                                     SizedBox(
-                                        width: media.width * 0.25,
+                                        width: context.w * 0.25,
                                         child: Text(
                                           languages[choosenLanguage]
                                               ['text_loose'],
                                           style: GoogleFonts.poppins(
-                                            fontSize: media.width * sixteen,
+                                            fontSize: context.w * sixteen,
                                           ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                         ))
                                   ],
                                 ),
-                                SizedBox(width: media.width * 0.05),
+                                SizedBox(width: context.w * 0.05),
 
                                 //choose loose or qty
                                 Row(
@@ -306,8 +295,8 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                         }
                                       },
                                       child: Container(
-                                        height: media.width * 0.04,
-                                        width: media.width * 0.04,
+                                        height: context.w * 0.04,
+                                        width: context.w * 0.04,
                                         decoration: BoxDecoration(
                                             border:
                                                 Border.all(color: Colors.black),
@@ -317,32 +306,32 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                                 languages[choosenLanguage]
                                                     ['text_loose'])
                                             ? Container(
-                                                height: media.width * 0.02,
-                                                width: media.width * 0.02,
+                                                height: context.w * 0.02,
+                                                width: context.w * 0.02,
                                                 decoration: const BoxDecoration(
                                                     shape: BoxShape.circle,
                                                     color: Colors.black),
                                               )
-                                            : Container(),
+                                            : const SizedBox.shrink(),
                                       ),
                                     ),
                                     SizedBox(
-                                      width: media.width * 0.02,
+                                      width: context.w * 0.02,
                                     ),
                                     Container(
                                         alignment: Alignment.centerLeft,
                                         padding: EdgeInsets.fromLTRB(
-                                            media.width * 0.03,
-                                            media.width * 0.0,
-                                            media.width * 0.03,
-                                            media.width * 0.01),
+                                            context.w * 0.03,
+                                            context.w * 0.0,
+                                            context.w * 0.03,
+                                            context.w * 0.01),
                                         decoration: BoxDecoration(
                                             border:
                                                 Border.all(color: borderLines),
                                             borderRadius:
                                                 BorderRadius.circular(10)),
-                                        height: media.width * 0.1,
-                                        width: media.width * 0.3,
+                                        height: context.w * 0.1,
+                                        width: context.w * 0.3,
                                         child: (goodsSize !=
                                                 languages[choosenLanguage]
                                                     ['text_loose'])
@@ -356,7 +345,7 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                                     hintStyle:
                                                         GoogleFonts.poppins(
                                                             fontSize:
-                                                                media.width *
+                                                                context.w *
                                                                     twelve)),
                                                 onChanged: (val) {
                                                   setState(() {
@@ -367,21 +356,21 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                                                     TextAlignVertical.center,
                                                 style: GoogleFonts.poppins(
                                                     fontSize:
-                                                        media.width * twelve),
+                                                        context.w * twelve),
                                               )
                                             : Text(
                                                 languages[choosenLanguage]
                                                     ['text_quantitywithunit'],
                                                 style: GoogleFonts.poppins(
                                                     fontSize:
-                                                        media.width * twelve,
+                                                        context.w * twelve,
                                                     color: hintColor)))
                                   ],
                                 ),
                               ],
                             ),
                           )
-                        : Container(),
+                        : const SizedBox.shrink(),
                     Button(
                         onTap: () {
                           setState(() {
@@ -392,9 +381,7 @@ class _ChooseGoodsState extends State<ChooseGoods> {
                           });
                         },
                         text: languages[choosenLanguage]['text_confirm']),
-                    SizedBox(
-                      height: media.width * 0.05,
-                    )
+                    SizedBox(height: context.w * 0.05)
                   ],
                 ),
               ),

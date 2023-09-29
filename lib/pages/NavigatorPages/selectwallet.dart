@@ -1,13 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/NavigatorPages/walletpage.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/noInternet/nointernet.dart';
-import 'package:awii/styles/styles.dart';
+import 'package:awii/core/constants/exports.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
 
 // ignore: must_be_immutable
 class SelectWallet extends StatefulWidget {
@@ -37,7 +29,6 @@ class _SelectWalletState extends State<SelectWallet> {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async {
         return false;
@@ -53,10 +44,10 @@ class _SelectWalletState extends State<SelectWallet> {
                 child: Stack(
                   children: [
                     Container(
-                      padding: EdgeInsets.fromLTRB(media.width * 0.05,
-                          media.width * 0.05, media.width * 0.05, 0),
-                      height: media.height * 1,
-                      width: media.width * 1,
+                      padding: EdgeInsets.fromLTRB(context.w * 0.05,
+                          context.w * 0.05, context.w * 0.05, 0),
+                      height: context.h * 1,
+                      width: context.w * 1,
                       color: page,
                       child: Column(
                         children: [
@@ -65,13 +56,13 @@ class _SelectWalletState extends State<SelectWallet> {
                             children: [
                               Container(
                                 padding:
-                                    EdgeInsets.only(bottom: media.width * 0.05),
-                                width: media.width * 0.9,
+                                    EdgeInsets.only(bottom: context.w * 0.05),
+                                width: context.w * 0.9,
                                 alignment: Alignment.center,
                                 child: Text(
                                   languages[choosenLanguage]['text_addmoney'],
                                   style: GoogleFonts.roboto(
-                                      fontSize: media.width * sixteen,
+                                      fontSize: context.w * sixteen,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -84,7 +75,7 @@ class _SelectWalletState extends State<SelectWallet> {
                             ],
                           ),
                           SizedBox(
-                            height: media.width * 0.05,
+                            height: context.w * 0.05,
                           ),
                           Expanded(
                             child: Column(
@@ -98,12 +89,12 @@ class _SelectWalletState extends State<SelectWallet> {
                                   },
                                 ),
                                 SizedBox(
-                                  height: media.width * 0.1,
+                                  height: context.w * 0.1,
                                 ),
 
                                 //pay money button
                                 Button(
-                                    width: media.width * 0.5,
+                                    width: context.w * 0.5,
                                     onTap: () async {
                                       FocusManager.instance.primaryFocus
                                           ?.unfocus();
@@ -136,23 +127,15 @@ class _SelectWalletState extends State<SelectWallet> {
                                                 addMoney, val2.id);
                                           }
                                           if (val3 == 'success') {
-                                            setState(() {
-                                              _success = true;
-                                            });
+                                            setState(() => _success = true);
                                           }
                                         } else {
-                                          setState(() {
-                                            _failed = true;
-                                          });
+                                          setState(() => _failed = true);
                                         }
                                       } else {
-                                        setState(() {
-                                          _failed = true;
-                                        });
+                                        setState(() => _failed = true);
                                       }
-                                      setState(() {
-                                        _isLoading = false;
-                                      });
+                                      setState(() => _isLoading = false);
                                     },
                                     text: 'Pay')
                               ],
@@ -167,15 +150,15 @@ class _SelectWalletState extends State<SelectWallet> {
                         ? Positioned(
                             top: 0,
                             child: Container(
-                              height: media.height * 1,
-                              width: media.width * 1,
+                              height: context.h * 1,
+                              width: context.w * 1,
                               color: Colors.transparent.withOpacity(0.6),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.all(media.width * 0.05),
-                                    width: media.width * 0.9,
+                                    padding: EdgeInsets.all(context.w * 0.05),
+                                    width: context.w * 0.9,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                         color: page),
@@ -186,12 +169,12 @@ class _SelectWalletState extends State<SelectWallet> {
                                               ['text_somethingwentwrong'],
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.roboto(
-                                              fontSize: media.width * sixteen,
+                                              fontSize: context.w * sixteen,
                                               color: textColor,
                                               fontWeight: FontWeight.w600),
                                         ),
                                         SizedBox(
-                                          height: media.width * 0.05,
+                                          height: context.w * 0.05,
                                         ),
                                         Button(
                                             onTap: () async {
@@ -214,15 +197,15 @@ class _SelectWalletState extends State<SelectWallet> {
                         ? Positioned(
                             top: 0,
                             child: Container(
-                              height: media.height * 1,
-                              width: media.width * 1,
+                              height: context.h * 1,
+                              width: context.w * 1,
                               color: Colors.transparent.withOpacity(0.6),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.all(media.width * 0.05),
-                                    width: media.width * 0.9,
+                                    padding: EdgeInsets.all(context.w * 0.05),
+                                    width: context.w * 0.9,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                         color: page),
@@ -233,12 +216,12 @@ class _SelectWalletState extends State<SelectWallet> {
                                               ['text_paymentsuccess'],
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.roboto(
-                                              fontSize: media.width * sixteen,
+                                              fontSize: context.w * sixteen,
                                               color: textColor,
                                               fontWeight: FontWeight.w600),
                                         ),
                                         SizedBox(
-                                          height: media.width * 0.05,
+                                          height: context.w * 0.05,
                                         ),
                                         Button(
                                             onTap: () async {

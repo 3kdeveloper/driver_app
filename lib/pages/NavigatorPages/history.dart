@@ -1,12 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/NavigatorPages/historydetails.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/noInternet/nointernet.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class History extends StatefulWidget {
   const History({Key? key}) : super(key: key);
@@ -47,7 +39,6 @@ class _HistoryState extends State<History> {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Material(
         child: ValueListenableBuilder(
             valueListenable: valueNotifierBook.value,
@@ -59,11 +50,11 @@ class _HistoryState extends State<History> {
                 child: Stack(
                   children: [
                     Container(
-                      height: media.height * 1,
-                      width: media.width * 1,
+                      height: context.h * 1,
+                      width: context.w * 1,
                       color: page,
-                      padding: EdgeInsets.fromLTRB(media.width * 0.05,
-                          media.width * 0.05, media.width * 0.05, 0),
+                      padding: EdgeInsets.fromLTRB(context.w * 0.05,
+                          context.w * 0.05, context.w * 0.05, 0),
                       child: Column(
                         children: [
                           SizedBox(height: MediaQuery.of(context).padding.top),
@@ -71,14 +62,14 @@ class _HistoryState extends State<History> {
                             children: [
                               Container(
                                 padding:
-                                    EdgeInsets.only(bottom: media.width * 0.05),
-                                width: media.width * 1,
+                                    EdgeInsets.only(bottom: context.w * 0.05),
+                                width: context.w * 1,
                                 alignment: Alignment.center,
                                 child: Text(
                                   languages[choosenLanguage]
                                       ['text_enable_history'],
                                   style: GoogleFonts.roboto(
-                                      fontSize: media.width * twenty,
+                                      fontSize: context.w * twenty,
                                       fontWeight: FontWeight.w600,
                                       color: textColor),
                                 ),
@@ -92,11 +83,11 @@ class _HistoryState extends State<History> {
                             ],
                           ),
                           SizedBox(
-                            height: media.width * 0.05,
+                            height: context.w * 0.05,
                           ),
                           Container(
-                            height: media.width * 0.13,
-                            width: media.width * 0.9,
+                            height: context.w * 0.13,
+                            width: context.w * 0.9,
                             decoration: BoxDecoration(
                                 color: page,
                                 borderRadius: BorderRadius.circular(12),
@@ -123,9 +114,9 @@ class _HistoryState extends State<History> {
                                     });
                                   },
                                   child: Container(
-                                      height: media.width * 0.13,
+                                      height: context.w * 0.13,
                                       alignment: Alignment.center,
-                                      width: media.width * 0.3,
+                                      width: context.w * 0.3,
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(12),
@@ -136,7 +127,7 @@ class _HistoryState extends State<History> {
                                         languages[choosenLanguage]
                                             ['text_upcoming'],
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * fifteen,
+                                            fontSize: context.w * fifteen,
                                             fontWeight: FontWeight.w600,
                                             color: (_showHistory == 0)
                                                 ? Colors.white
@@ -158,9 +149,9 @@ class _HistoryState extends State<History> {
                                     });
                                   },
                                   child: Container(
-                                      height: media.width * 0.13,
+                                      height: context.w * 0.13,
                                       alignment: Alignment.center,
-                                      width: media.width * 0.3,
+                                      width: context.w * 0.3,
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(12),
@@ -171,7 +162,7 @@ class _HistoryState extends State<History> {
                                         languages[choosenLanguage]
                                             ['text_completed'],
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * fifteen,
+                                            fontSize: context.w * fifteen,
                                             fontWeight: FontWeight.w600,
                                             color: (_showHistory == 1)
                                                 ? Colors.white
@@ -193,9 +184,9 @@ class _HistoryState extends State<History> {
                                     });
                                   },
                                   child: Container(
-                                      height: media.width * 0.13,
+                                      height: context.w * 0.13,
                                       alignment: Alignment.center,
-                                      width: media.width * 0.3,
+                                      width: context.w * 0.3,
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(12),
@@ -206,7 +197,7 @@ class _HistoryState extends State<History> {
                                         languages[choosenLanguage]
                                             ['text_cancelled'],
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * fifteen,
+                                            fontSize: context.w * fifteen,
                                             fontWeight: FontWeight.w600,
                                             color: (_showHistory == 2)
                                                 ? Colors.white
@@ -217,7 +208,7 @@ class _HistoryState extends State<History> {
                             ),
                           ),
                           SizedBox(
-                            height: media.width * 0.1,
+                            height: context.w * 0.1,
                           ),
                           Expanded(
                               child: SingleChildScrollView(
@@ -243,9 +234,9 @@ class _HistoryState extends State<History> {
                                                               myHistory[i][
                                                                   'accepted_at'],
                                                               style: GoogleFonts.roboto(
-                                                                  fontSize: media
-                                                                          .width *
-                                                                      sixteen,
+                                                                  fontSize:
+                                                                      context.w *
+                                                                          sixteen,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w600,
@@ -265,29 +256,29 @@ class _HistoryState extends State<History> {
                                                               },
                                                               child: Container(
                                                                 margin: EdgeInsets.only(
-                                                                    top: media
-                                                                            .width *
+                                                                    top: context
+                                                                            .w *
                                                                         0.025,
-                                                                    bottom: media
-                                                                            .width *
+                                                                    bottom: context
+                                                                            .w *
                                                                         0.05,
-                                                                    left: media
-                                                                            .width *
+                                                                    left: context
+                                                                            .w *
                                                                         0.015,
-                                                                    right: media
-                                                                            .width *
+                                                                    right: context
+                                                                            .w *
                                                                         0.015),
-                                                                width: media
-                                                                        .width *
-                                                                    0.85,
+                                                                width:
+                                                                    context.w *
+                                                                        0.85,
                                                                 padding: EdgeInsets.fromLTRB(
-                                                                    media.width *
+                                                                    context.w *
                                                                         0.025,
-                                                                    media.width *
+                                                                    context.w *
                                                                         0.05,
-                                                                    media.width *
+                                                                    context.w *
                                                                         0.025,
-                                                                    media.width *
+                                                                    context.w *
                                                                         0.05),
                                                                 decoration: BoxDecoration(
                                                                     borderRadius:
@@ -314,16 +305,14 @@ class _HistoryState extends State<History> {
                                                                           [
                                                                           'request_number'],
                                                                       style: GoogleFonts.roboto(
-                                                                          fontSize: media.width *
+                                                                          fontSize: context.w *
                                                                               sixteen,
                                                                           fontWeight:
                                                                               FontWeight.w600),
                                                                     ),
                                                                     SizedBox(
-                                                                      height: media
-                                                                              .width *
-                                                                          0.02,
-                                                                    ),
+                                                                        height: context.w *
+                                                                            0.02),
                                                                     Row(
                                                                       mainAxisAlignment:
                                                                           MainAxisAlignment
@@ -331,36 +320,36 @@ class _HistoryState extends State<History> {
                                                                       children: [
                                                                         Container(
                                                                           height:
-                                                                              media.width * 0.16,
+                                                                              context.w * 0.16,
                                                                           width:
-                                                                              media.width * 0.16,
+                                                                              context.w * 0.16,
                                                                           decoration: BoxDecoration(
                                                                               shape: BoxShape.circle,
                                                                               image: DecorationImage(image: NetworkImage(myHistory[i]['driverDetail']['data']['profile_picture']), fit: BoxFit.cover)),
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                              media.width * 0.02,
+                                                                              context.w * 0.02,
                                                                         ),
                                                                         Column(
                                                                           crossAxisAlignment:
                                                                               CrossAxisAlignment.start,
                                                                           children: [
                                                                             SizedBox(
-                                                                              width: media.width * 0.3,
+                                                                              width: context.w * 0.3,
                                                                               child: Text(
                                                                                 myHistory[i]['driverDetail']['data']['name'],
-                                                                                style: GoogleFonts.roboto(fontSize: media.width * eighteen, fontWeight: FontWeight.w600),
+                                                                                style: GoogleFonts.roboto(fontSize: context.w * eighteen, fontWeight: FontWeight.w600),
                                                                               ),
                                                                             ),
                                                                             SizedBox(
-                                                                              height: media.width * 0.01,
+                                                                              height: context.w * 0.01,
                                                                             ),
                                                                             Row(
                                                                               mainAxisAlignment: MainAxisAlignment.start,
                                                                               children: [
                                                                                 SizedBox(
-                                                                                  width: media.width * 0.06,
+                                                                                  width: context.w * 0.06,
                                                                                   child: (myHistory[i]['payment_opt'] == '1')
                                                                                       ? Image.asset(
                                                                                           'assets/images/cash.png',
@@ -379,7 +368,7 @@ class _HistoryState extends State<History> {
                                                                                               : Container(),
                                                                                 ),
                                                                                 SizedBox(
-                                                                                  width: media.width * 0.01,
+                                                                                  width: context.w * 0.01,
                                                                                 ),
                                                                                 Text(
                                                                                   (myHistory[i]['payment_opt'] == '1')
@@ -389,7 +378,7 @@ class _HistoryState extends State<History> {
                                                                                           : (myHistory[i]['payment_opt'] == '0')
                                                                                               ? languages[choosenLanguage]['text_card']
                                                                                               : '',
-                                                                                  style: GoogleFonts.roboto(fontSize: media.width * twelve, fontWeight: FontWeight.w600),
+                                                                                  style: GoogleFonts.roboto(fontSize: context.w * twelve, fontWeight: FontWeight.w600),
                                                                                 ),
                                                                               ],
                                                                             ),
@@ -405,16 +394,14 @@ class _HistoryState extends State<History> {
                                                                                 children: [
                                                                                   Text(
                                                                                     myHistory[i]['requestBill']['data']['requested_currency_symbol'] + ' ' + myHistory[i]['requestBill']['data']['total_amount'].toString(),
-                                                                                    style: GoogleFonts.roboto(fontSize: media.width * sixteen, fontWeight: FontWeight.bold),
+                                                                                    style: GoogleFonts.roboto(fontSize: context.w * sixteen, fontWeight: FontWeight.bold),
                                                                                   ),
-                                                                                  SizedBox(
-                                                                                    height: media.width * 0.01,
-                                                                                  ),
+                                                                                  SizedBox(height: context.w * 0.01),
                                                                                   Row(
                                                                                     children: [
                                                                                       Text(
                                                                                         (myHistory[i]['total_time'] < 50) ? myHistory[i]['total_distance'] + myHistory[i]['unit'] + ' - ' + myHistory[i]['total_time'].toString() + ' mins' : myHistory[i]['total_distance'] + myHistory[i]['unit'] + ' - ' + (myHistory[i]['total_time'] / 60).round().toString() + ' hr',
-                                                                                        style: GoogleFonts.roboto(fontSize: media.width * twelve),
+                                                                                        style: GoogleFonts.roboto(fontSize: context.w * twelve),
                                                                                       ),
                                                                                     ],
                                                                                   )
@@ -426,10 +413,8 @@ class _HistoryState extends State<History> {
                                                                       ],
                                                                     ),
                                                                     SizedBox(
-                                                                      height: media
-                                                                              .width *
-                                                                          0.05,
-                                                                    ),
+                                                                        height: context.w *
+                                                                            0.05),
                                                                     Row(
                                                                       mainAxisAlignment:
                                                                           MainAxisAlignment
@@ -437,9 +422,9 @@ class _HistoryState extends State<History> {
                                                                       children: [
                                                                         Container(
                                                                           height:
-                                                                              media.width * 0.05,
+                                                                              context.w * 0.05,
                                                                           width:
-                                                                              media.width * 0.05,
+                                                                              context.w * 0.05,
                                                                           alignment:
                                                                               Alignment.center,
                                                                           decoration: BoxDecoration(
@@ -448,24 +433,24 @@ class _HistoryState extends State<History> {
                                                                           child:
                                                                               Container(
                                                                             height:
-                                                                                media.width * 0.025,
+                                                                                context.w * 0.025,
                                                                             width:
-                                                                                media.width * 0.025,
+                                                                                context.w * 0.025,
                                                                             decoration:
                                                                                 const BoxDecoration(shape: BoxShape.circle, color: Color(0xffFF0000)),
                                                                           ),
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                              media.width * 0.05,
+                                                                              context.w * 0.05,
                                                                         ),
                                                                         SizedBox(
-                                                                            width: media.width *
+                                                                            width: context.w *
                                                                                 0.5,
                                                                             child:
                                                                                 Text(
                                                                               myHistory[i]['pick_address'],
-                                                                              style: GoogleFonts.roboto(fontSize: media.width * twelve),
+                                                                              style: GoogleFonts.roboto(fontSize: context.w * twelve),
                                                                             )),
                                                                         Expanded(
                                                                             child:
@@ -475,7 +460,7 @@ class _HistoryState extends State<History> {
                                                                           children: [
                                                                             Text(
                                                                               '${myHistory[i]['trip_start_time'].toString().split(' ').toList()[2]} ${myHistory[i]['accepted_at'].toString().split(' ').toList()[3]}',
-                                                                              style: GoogleFonts.roboto(fontSize: media.width * twelve, color: const Color(0xff898989)),
+                                                                              style: GoogleFonts.roboto(fontSize: context.w * twelve, color: const Color(0xff898989)),
                                                                               textDirection: TextDirection.ltr,
                                                                             )
                                                                           ],
@@ -483,10 +468,8 @@ class _HistoryState extends State<History> {
                                                                       ],
                                                                     ),
                                                                     SizedBox(
-                                                                      height: media
-                                                                              .width *
-                                                                          0.05,
-                                                                    ),
+                                                                        height: context.w *
+                                                                            0.05),
                                                                     Row(
                                                                       mainAxisAlignment:
                                                                           MainAxisAlignment
@@ -494,9 +477,9 @@ class _HistoryState extends State<History> {
                                                                       children: [
                                                                         Container(
                                                                           height:
-                                                                              media.width * 0.05,
+                                                                              context.w * 0.05,
                                                                           width:
-                                                                              media.width * 0.05,
+                                                                              context.w * 0.05,
                                                                           alignment:
                                                                               Alignment.center,
                                                                           decoration: BoxDecoration(
@@ -505,24 +488,24 @@ class _HistoryState extends State<History> {
                                                                           child:
                                                                               Container(
                                                                             height:
-                                                                                media.width * 0.025,
+                                                                                context.w * 0.025,
                                                                             width:
-                                                                                media.width * 0.025,
+                                                                                context.w * 0.025,
                                                                             decoration:
                                                                                 const BoxDecoration(shape: BoxShape.circle, color: Color(0xff319900)),
                                                                           ),
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                              media.width * 0.05,
+                                                                              context.w * 0.05,
                                                                         ),
                                                                         SizedBox(
-                                                                            width: media.width *
+                                                                            width: context.w *
                                                                                 0.5,
                                                                             child:
                                                                                 Text(
                                                                               myHistory[i]['drop_address'],
-                                                                              style: GoogleFonts.roboto(fontSize: media.width * twelve),
+                                                                              style: GoogleFonts.roboto(fontSize: context.w * twelve),
                                                                             )),
                                                                         Expanded(
                                                                             child:
@@ -532,7 +515,7 @@ class _HistoryState extends State<History> {
                                                                           children: [
                                                                             Text(
                                                                               '${myHistory[i]['completed_at'].toString().split(' ').toList()[2]} ${myHistory[i]['completed_at'].toString().split(' ').toList()[3]}',
-                                                                              style: GoogleFonts.roboto(fontSize: media.width * twelve, color: const Color(0xff898989)),
+                                                                              style: GoogleFonts.roboto(fontSize: context.w * twelve, color: const Color(0xff898989)),
                                                                               textDirection: TextDirection.ltr,
                                                                             )
                                                                           ],
@@ -559,7 +542,7 @@ class _HistoryState extends State<History> {
                                                                       'updated_at'],
                                                                   style: GoogleFonts.roboto(
                                                                       fontSize:
-                                                                          media.width *
+                                                                          context.w *
                                                                               sixteen,
                                                                       fontWeight:
                                                                           FontWeight
@@ -569,29 +552,29 @@ class _HistoryState extends State<History> {
                                                                 ),
                                                                 Container(
                                                                   margin: EdgeInsets.only(
-                                                                      top: media
-                                                                              .width *
+                                                                      top: context
+                                                                              .w *
                                                                           0.025,
-                                                                      bottom: media
-                                                                              .width *
+                                                                      bottom: context
+                                                                              .w *
                                                                           0.05,
-                                                                      left: media
-                                                                              .width *
+                                                                      left: context
+                                                                              .w *
                                                                           0.015,
-                                                                      right: media
-                                                                              .width *
+                                                                      right: context
+                                                                              .w *
                                                                           0.015),
-                                                                  width: media
-                                                                          .width *
+                                                                  width: context
+                                                                          .w *
                                                                       0.85,
                                                                   padding: EdgeInsets.fromLTRB(
-                                                                      media.width *
+                                                                      context.w *
                                                                           0.025,
-                                                                      media.width *
+                                                                      context.w *
                                                                           0.05,
-                                                                      media.width *
+                                                                      context.w *
                                                                           0.025,
-                                                                      media.width *
+                                                                      context.w *
                                                                           0.05),
                                                                   decoration: BoxDecoration(
                                                                       borderRadius:
@@ -616,38 +599,38 @@ class _HistoryState extends State<History> {
                                                                             [
                                                                             'request_number'],
                                                                         style: GoogleFonts.roboto(
-                                                                            fontSize: media.width *
+                                                                            fontSize: context.w *
                                                                                 sixteen,
                                                                             fontWeight:
                                                                                 FontWeight.w600),
                                                                       ),
                                                                       SizedBox(
-                                                                        height: media.width *
+                                                                        height: context.w *
                                                                             0.02,
                                                                       ),
                                                                       (myHistory[i]['driverDetail'] !=
                                                                               null)
                                                                           ? Container(
-                                                                              padding: EdgeInsets.only(bottom: media.width * 0.05),
+                                                                              padding: EdgeInsets.only(bottom: context.w * 0.05),
                                                                               child: Row(
                                                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                                                 children: [
                                                                                   Container(
-                                                                                    height: media.width * 0.16,
-                                                                                    width: media.width * 0.16,
+                                                                                    height: context.w * 0.16,
+                                                                                    width: context.w * 0.16,
                                                                                     decoration: BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: NetworkImage(myHistory[i]['driverDetail']['data']['profile_picture']), fit: BoxFit.cover)),
                                                                                   ),
                                                                                   SizedBox(
-                                                                                    width: media.width * 0.02,
+                                                                                    width: context.w * 0.02,
                                                                                   ),
                                                                                   Column(
                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                     children: [
                                                                                       SizedBox(
-                                                                                        width: media.width * 0.3,
+                                                                                        width: context.w * 0.3,
                                                                                         child: Text(
                                                                                           myHistory[i]['driverDetail']['data']['name'],
-                                                                                          style: GoogleFonts.roboto(fontSize: media.width * eighteen, fontWeight: FontWeight.w600),
+                                                                                          style: GoogleFonts.roboto(fontSize: context.w * eighteen, fontWeight: FontWeight.w600),
                                                                                         ),
                                                                                       ),
                                                                                     ],
@@ -663,7 +646,7 @@ class _HistoryState extends State<History> {
                                                                                               color: Color(0xffFF0000),
                                                                                             ),
                                                                                             SizedBox(
-                                                                                              height: media.width * 0.01,
+                                                                                              height: context.w * 0.01,
                                                                                             ),
                                                                                           ],
                                                                                         ),
@@ -680,58 +663,58 @@ class _HistoryState extends State<History> {
                                                                         children: [
                                                                           Container(
                                                                             height:
-                                                                                media.width * 0.05,
+                                                                                context.w * 0.05,
                                                                             width:
-                                                                                media.width * 0.05,
+                                                                                context.w * 0.05,
                                                                             alignment:
                                                                                 Alignment.center,
                                                                             decoration:
                                                                                 BoxDecoration(shape: BoxShape.circle, color: const Color(0xffFF0000).withOpacity(0.3)),
                                                                             child:
                                                                                 Container(
-                                                                              height: media.width * 0.025,
-                                                                              width: media.width * 0.025,
+                                                                              height: context.w * 0.025,
+                                                                              width: context.w * 0.025,
                                                                               decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xffFF0000)),
                                                                             ),
                                                                           ),
                                                                           SizedBox(
                                                                             width:
-                                                                                media.width * 0.05,
+                                                                                context.w * 0.05,
                                                                           ),
                                                                           SizedBox(
-                                                                              width: media.width * 0.7,
+                                                                              width: context.w * 0.7,
                                                                               child: Text(
                                                                                 myHistory[i]['pick_address'],
-                                                                                style: GoogleFonts.roboto(fontSize: media.width * twelve),
+                                                                                style: GoogleFonts.roboto(fontSize: context.w * twelve),
                                                                               )),
                                                                         ],
                                                                       ),
                                                                       (myHistory[i]['drop_address'] !=
                                                                               null)
                                                                           ? Container(
-                                                                              padding: EdgeInsets.only(top: media.width * 0.05),
+                                                                              padding: EdgeInsets.only(top: context.w * 0.05),
                                                                               child: Row(
                                                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                                                 children: [
                                                                                   Container(
-                                                                                    height: media.width * 0.05,
-                                                                                    width: media.width * 0.05,
+                                                                                    height: context.w * 0.05,
+                                                                                    width: context.w * 0.05,
                                                                                     alignment: Alignment.center,
                                                                                     decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xff319900).withOpacity(0.3)),
                                                                                     child: Container(
-                                                                                      height: media.width * 0.025,
-                                                                                      width: media.width * 0.025,
+                                                                                      height: context.w * 0.025,
+                                                                                      width: context.w * 0.025,
                                                                                       decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xff319900)),
                                                                                     ),
                                                                                   ),
                                                                                   SizedBox(
-                                                                                    width: media.width * 0.05,
+                                                                                    width: context.w * 0.05,
                                                                                   ),
                                                                                   SizedBox(
-                                                                                      width: media.width * 0.7,
+                                                                                      width: context.w * 0.7,
                                                                                       child: Text(
                                                                                         myHistory[i]['drop_address'],
-                                                                                        style: GoogleFonts.roboto(fontSize: media.width * twelve),
+                                                                                        style: GoogleFonts.roboto(fontSize: context.w * twelve),
                                                                                       )),
                                                                                 ],
                                                                               ),
@@ -761,7 +744,7 @@ class _HistoryState extends State<History> {
                                                                               [
                                                                               'trip_start_time'],
                                                                           style: GoogleFonts.roboto(
-                                                                              fontSize: media.width * sixteen,
+                                                                              fontSize: context.w * sixteen,
                                                                               fontWeight: FontWeight.w600,
                                                                               color: textColor),
                                                                         ),
@@ -769,25 +752,25 @@ class _HistoryState extends State<History> {
                                                                     ),
                                                                     Container(
                                                                       margin: EdgeInsets.only(
-                                                                          top: media.width *
+                                                                          top: context.w *
                                                                               0.025,
-                                                                          bottom: media.width *
+                                                                          bottom: context.w *
                                                                               0.05,
-                                                                          left: media.width *
+                                                                          left: context.w *
                                                                               0.015,
                                                                           right:
-                                                                              media.width * 0.015),
-                                                                      width: media
-                                                                              .width *
+                                                                              context.w * 0.015),
+                                                                      width: context
+                                                                              .w *
                                                                           0.85,
                                                                       padding: EdgeInsets.fromLTRB(
-                                                                          media.width *
+                                                                          context.w *
                                                                               0.025,
-                                                                          media.width *
+                                                                          context.w *
                                                                               0.05,
-                                                                          media.width *
+                                                                          context.w *
                                                                               0.025,
-                                                                          media.width *
+                                                                          context.w *
                                                                               0.05),
                                                                       decoration: BoxDecoration(
                                                                           borderRadius:
@@ -810,7 +793,7 @@ class _HistoryState extends State<History> {
                                                                             children: [
                                                                               Text(
                                                                                 myHistory[i]['request_number'],
-                                                                                style: GoogleFonts.roboto(fontSize: media.width * sixteen, fontWeight: FontWeight.w600),
+                                                                                style: GoogleFonts.roboto(fontSize: context.w * sixteen, fontWeight: FontWeight.w600),
                                                                               ),
                                                                               InkWell(
                                                                                 onTap: () {
@@ -821,37 +804,37 @@ class _HistoryState extends State<History> {
                                                                                 },
                                                                                 child: Text(
                                                                                   languages[choosenLanguage]['text_cancel_ride'],
-                                                                                  style: GoogleFonts.roboto(fontSize: media.width * sixteen, fontWeight: FontWeight.w600, color: buttonColor),
+                                                                                  style: GoogleFonts.roboto(fontSize: context.w * sixteen, fontWeight: FontWeight.w600, color: buttonColor),
                                                                                 ),
                                                                               ),
                                                                             ],
                                                                           ),
                                                                           SizedBox(
                                                                             height:
-                                                                                media.width * 0.02,
+                                                                                context.w * 0.02,
                                                                           ),
                                                                           (myHistory[i]['driverDetail'] != null)
                                                                               ? Container(
-                                                                                  padding: EdgeInsets.only(bottom: media.width * 0.05),
+                                                                                  padding: EdgeInsets.only(bottom: context.w * 0.05),
                                                                                   child: Row(
                                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                                     children: [
                                                                                       Container(
-                                                                                        height: media.width * 0.16,
-                                                                                        width: media.width * 0.16,
+                                                                                        height: context.w * 0.16,
+                                                                                        width: context.w * 0.16,
                                                                                         decoration: BoxDecoration(shape: BoxShape.circle, image: DecorationImage(image: NetworkImage(myHistory[i]['driverDetail']['data']['profile_picture']), fit: BoxFit.cover)),
                                                                                       ),
                                                                                       SizedBox(
-                                                                                        width: media.width * 0.02,
+                                                                                        width: context.w * 0.02,
                                                                                       ),
                                                                                       Column(
                                                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                                                         children: [
                                                                                           SizedBox(
-                                                                                            width: media.width * 0.3,
+                                                                                            width: context.w * 0.3,
                                                                                             child: Text(
                                                                                               myHistory[i]['driverDetail']['data']['name'],
-                                                                                              style: GoogleFonts.roboto(fontSize: media.width * eighteen, fontWeight: FontWeight.w600),
+                                                                                              style: GoogleFonts.roboto(fontSize: context.w * eighteen, fontWeight: FontWeight.w600),
                                                                                             ),
                                                                                           ),
                                                                                         ],
@@ -867,7 +850,7 @@ class _HistoryState extends State<History> {
                                                                                                   color: Color(0xffFF0000),
                                                                                                 ),
                                                                                                 SizedBox(
-                                                                                                  height: media.width * 0.01,
+                                                                                                  height: context.w * 0.01,
                                                                                                 ),
                                                                                               ],
                                                                                             ),
@@ -883,52 +866,52 @@ class _HistoryState extends State<History> {
                                                                                 MainAxisAlignment.start,
                                                                             children: [
                                                                               Container(
-                                                                                height: media.width * 0.05,
-                                                                                width: media.width * 0.05,
+                                                                                height: context.w * 0.05,
+                                                                                width: context.w * 0.05,
                                                                                 alignment: Alignment.center,
                                                                                 decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xffFF0000).withOpacity(0.3)),
                                                                                 child: Container(
-                                                                                  height: media.width * 0.025,
-                                                                                  width: media.width * 0.025,
+                                                                                  height: context.w * 0.025,
+                                                                                  width: context.w * 0.025,
                                                                                   decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xffFF0000)),
                                                                                 ),
                                                                               ),
                                                                               SizedBox(
-                                                                                width: media.width * 0.05,
+                                                                                width: context.w * 0.05,
                                                                               ),
                                                                               SizedBox(
-                                                                                  width: media.width * 0.7,
+                                                                                  width: context.w * 0.7,
                                                                                   child: Text(
                                                                                     myHistory[i]['pick_address'],
-                                                                                    style: GoogleFonts.roboto(fontSize: media.width * twelve),
+                                                                                    style: GoogleFonts.roboto(fontSize: context.w * twelve),
                                                                                   )),
                                                                             ],
                                                                           ),
                                                                           (myHistory[i]['drop_address'] != null)
                                                                               ? Container(
-                                                                                  padding: EdgeInsets.only(top: media.width * 0.05),
+                                                                                  padding: EdgeInsets.only(top: context.w * 0.05),
                                                                                   child: Row(
                                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                                     children: [
                                                                                       Container(
-                                                                                        height: media.width * 0.05,
-                                                                                        width: media.width * 0.05,
+                                                                                        height: context.w * 0.05,
+                                                                                        width: context.w * 0.05,
                                                                                         alignment: Alignment.center,
                                                                                         decoration: BoxDecoration(shape: BoxShape.circle, color: const Color(0xff319900).withOpacity(0.3)),
                                                                                         child: Container(
-                                                                                          height: media.width * 0.025,
-                                                                                          width: media.width * 0.025,
+                                                                                          height: context.w * 0.025,
+                                                                                          width: context.w * 0.025,
                                                                                           decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xff319900)),
                                                                                         ),
                                                                                       ),
                                                                                       SizedBox(
-                                                                                        width: media.width * 0.05,
+                                                                                        width: context.w * 0.05,
                                                                                       ),
                                                                                       SizedBox(
-                                                                                          width: media.width * 0.7,
+                                                                                          width: context.w * 0.7,
                                                                                           child: Text(
                                                                                             myHistory[i]['drop_address'],
-                                                                                            style: GoogleFonts.roboto(fontSize: media.width * twelve),
+                                                                                            style: GoogleFonts.roboto(fontSize: context.w * twelve),
                                                                                           )),
                                                                                     ],
                                                                                   ),
@@ -950,11 +933,11 @@ class _HistoryState extends State<History> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               SizedBox(
-                                                height: media.width * 0.05,
+                                                height: context.w * 0.05,
                                               ),
                                               Container(
-                                                height: media.width * 0.7,
-                                                width: media.width * 0.7,
+                                                height: context.w * 0.7,
+                                                width: context.w * 0.7,
                                                 decoration: const BoxDecoration(
                                                     image: DecorationImage(
                                                         image: AssetImage(
@@ -962,16 +945,16 @@ class _HistoryState extends State<History> {
                                                         fit: BoxFit.contain)),
                                               ),
                                               SizedBox(
-                                                height: media.width * 0.02,
+                                                height: context.w * 0.02,
                                               ),
                                               SizedBox(
-                                                width: media.width * 0.9,
+                                                width: context.w * 0.9,
                                                 child: Text(
                                                   languages[choosenLanguage]
                                                       ['text_noDataFound'],
                                                   style: GoogleFonts.roboto(
                                                       fontSize:
-                                                          media.width * sixteen,
+                                                          context.w * sixteen,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: textColor),
@@ -1007,9 +990,9 @@ class _HistoryState extends State<History> {
                                             },
                                             child: Container(
                                               padding: EdgeInsets.all(
-                                                  media.width * 0.025),
+                                                  context.w * 0.025),
                                               margin: EdgeInsets.only(
-                                                  bottom: media.width * 0.05),
+                                                  bottom: context.w * 0.05),
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(10),
@@ -1022,7 +1005,7 @@ class _HistoryState extends State<History> {
                                                     ['text_loadmore'],
                                                 style: GoogleFonts.roboto(
                                                     fontSize:
-                                                        media.width * sixteen,
+                                                        context.w * sixteen,
                                                     color: textColor),
                                               ),
                                             ),
@@ -1039,20 +1022,20 @@ class _HistoryState extends State<History> {
                     (_cancelRide == true)
                         ? Positioned(
                             child: Container(
-                              height: media.height * 1,
-                              width: media.width * 1,
+                              height: context.h * 1,
+                              width: context.w * 1,
                               color: Colors.transparent.withOpacity(0.6),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   SizedBox(
-                                    width: media.width * 0.9,
+                                    width: context.w * 0.9,
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Container(
-                                            height: media.height * 0.1,
-                                            width: media.width * 0.1,
+                                            height: context.h * 0.1,
+                                            width: context.w * 0.1,
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 color: page),
@@ -1069,8 +1052,8 @@ class _HistoryState extends State<History> {
                                     ),
                                   ),
                                   Container(
-                                    padding: EdgeInsets.all(media.width * 0.05),
-                                    width: media.width * 0.9,
+                                    padding: EdgeInsets.all(context.w * 0.05),
+                                    width: context.w * 0.9,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
                                         color: page),
@@ -1080,11 +1063,11 @@ class _HistoryState extends State<History> {
                                           languages[choosenLanguage]
                                               ['text_ridecancel'],
                                           style: GoogleFonts.roboto(
-                                              fontSize: media.width * fourteen,
+                                              fontSize: context.w * fourteen,
                                               color: textColor),
                                         ),
                                         SizedBox(
-                                          height: media.width * 0.05,
+                                          height: context.w * 0.05,
                                         ),
                                         Button(
                                             onTap: () async {

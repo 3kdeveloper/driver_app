@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class About extends StatefulWidget {
   const About({Key? key}) : super(key: key);
@@ -14,16 +10,15 @@ class About extends StatefulWidget {
 class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Material(
       child: Directionality(
         textDirection: (languageDirection == 'rtl')
             ? TextDirection.rtl
             : TextDirection.ltr,
         child: Container(
-          padding: EdgeInsets.all(media.width * 0.05),
-          height: media.height * 1,
-          width: media.width * 1,
+          padding: EdgeInsets.all(context.w * 0.05),
+          height: context.h * 1,
+          width: context.w * 1,
           color: page,
           child: Column(
             children: [
@@ -35,13 +30,13 @@ class _AboutState extends State<About> {
                     Stack(
                       children: [
                         Container(
-                          padding: EdgeInsets.only(bottom: media.width * 0.05),
-                          width: media.width * 1,
+                          padding: EdgeInsets.only(bottom: context.w * 0.05),
+                          width: context.w * 1,
                           alignment: Alignment.center,
                           child: Text(
                             languages[choosenLanguage]['text_about'],
                             style: GoogleFonts.roboto(
-                                fontSize: media.width * twenty,
+                                fontSize: context.w * twenty,
                                 fontWeight: FontWeight.w600,
                                 color: textColor),
                           ),
@@ -55,18 +50,18 @@ class _AboutState extends State<About> {
                       ],
                     ),
                     SizedBox(
-                      height: media.width * 0.05,
+                      height: context.w * 0.05,
                     ),
                     SizedBox(
-                      width: media.width * 0.9,
-                      height: media.height * 0.16,
+                      width: context.w * 0.9,
+                      height: context.h * 0.16,
                       child: Image.asset(
                         'assets/images/about_bg.jpg',
                         fit: BoxFit.contain,
                       ),
                     ),
                     SizedBox(
-                      height: media.width * 0.1,
+                      height: context.w * 0.1,
                     ),
                     //terms and condition
                     InkWell(
@@ -76,13 +71,13 @@ class _AboutState extends State<About> {
                       child: Text(
                         languages[choosenLanguage]['text_termsandconditions'],
                         style: GoogleFonts.roboto(
-                            fontSize: media.width * sixteen,
+                            fontSize: context.w * sixteen,
                             fontWeight: FontWeight.w600,
                             color: textColor),
                       ),
                     ),
                     SizedBox(
-                      height: media.width * 0.05,
+                      height: context.w * 0.05,
                     ),
                     //privacy policy
                     InkWell(
@@ -92,13 +87,13 @@ class _AboutState extends State<About> {
                       child: Text(
                         languages[choosenLanguage]['text_privacy'],
                         style: GoogleFonts.roboto(
-                            fontSize: media.width * sixteen,
+                            fontSize: context.w * sixteen,
                             fontWeight: FontWeight.w600,
                             color: textColor),
                       ),
                     ),
                     SizedBox(
-                      height: media.width * 0.05,
+                      height: context.w * 0.05,
                     ),
                     //website url
                     InkWell(
@@ -108,7 +103,7 @@ class _AboutState extends State<About> {
                       child: Text(
                         languages[choosenLanguage]['text_about'],
                         style: GoogleFonts.roboto(
-                            fontSize: media.width * sixteen,
+                            fontSize: context.w * sixteen,
                             fontWeight: FontWeight.w600,
                             color: textColor),
                       ),

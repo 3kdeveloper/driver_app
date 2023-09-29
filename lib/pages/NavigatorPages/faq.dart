@@ -1,12 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:awii/core/constants/exports.dart';
 import 'package:location/location.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/noInternet/nointernet.dart';
-import 'package:awii/pages/onTripPage/map_page.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
 
 class Faq extends StatefulWidget {
   const Faq({Key? key}) : super(key: key);
@@ -46,7 +39,6 @@ class _FaqState extends State<Faq> {
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Material(
       child: ValueListenableBuilder(
           valueListenable: valueNotifierBook.value,
@@ -58,11 +50,11 @@ class _FaqState extends State<Faq> {
               child: Stack(
                 children: [
                   Container(
-                    height: media.height * 1,
-                    width: media.width * 1,
+                    height: context.h * 1,
+                    width: context.w * 1,
                     color: page,
-                    padding: EdgeInsets.fromLTRB(media.width * 0.05,
-                        media.width * 0.05, media.width * 0.05, 0),
+                    padding: EdgeInsets.fromLTRB(context.w * 0.05,
+                        context.w * 0.05, context.w * 0.05, 0),
                     child: Column(
                       children: [
                         SizedBox(height: MediaQuery.of(context).padding.top),
@@ -70,13 +62,13 @@ class _FaqState extends State<Faq> {
                           children: [
                             Container(
                               padding:
-                                  EdgeInsets.only(bottom: media.width * 0.05),
-                              width: media.width * 1,
+                                  EdgeInsets.only(bottom: context.w * 0.05),
+                              width: context.w * 1,
                               alignment: Alignment.center,
                               child: Text(
                                 languages[choosenLanguage]['text_faq'],
                                 style: GoogleFonts.roboto(
-                                    fontSize: media.width * twenty,
+                                    fontSize: context.w * twenty,
                                     fontWeight: FontWeight.w600,
                                     color: textColor),
                               ),
@@ -89,20 +81,16 @@ class _FaqState extends State<Faq> {
                                     child: const Icon(Icons.arrow_back)))
                           ],
                         ),
+                        SizedBox(height: context.w * 0.05),
                         SizedBox(
-                          height: media.width * 0.05,
-                        ),
-                        SizedBox(
-                          width: media.width * 0.9,
-                          height: media.height * 0.16,
+                          width: context.w * 0.9,
+                          height: context.h * 0.16,
                           child: Image.asset(
                             'assets/images/faq_bg.jpg',
                             fit: BoxFit.contain,
                           ),
                         ),
-                        SizedBox(
-                          height: media.width * 0.05,
-                        ),
+                        SizedBox(height: context.w * 0.05),
                         Expanded(
                           child: SingleChildScrollView(
                             child: (faqData.isNotEmpty)
@@ -119,13 +107,13 @@ class _FaqState extends State<Faq> {
                                                   });
                                                 },
                                                 child: Container(
-                                                  width: media.width * 0.9,
+                                                  width: context.w * 0.9,
                                                   margin: EdgeInsets.only(
-                                                      top: media.width * 0.025,
+                                                      top: context.w * 0.025,
                                                       bottom:
-                                                          media.width * 0.025),
+                                                          context.w * 0.025),
                                                   padding: EdgeInsets.all(
-                                                      media.width * 0.05),
+                                                      context.w * 0.05),
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -146,15 +134,14 @@ class _FaqState extends State<Faq> {
                                                         children: [
                                                           SizedBox(
                                                               // color: Colors.red,
-                                                              width:
-                                                                  media.width *
-                                                                      0.7,
+                                                              width: context.w *
+                                                                  0.7,
                                                               child: Text(
                                                                 faqData[i][
                                                                     'question'],
                                                                 style: GoogleFonts.roboto(
-                                                                    fontSize: media
-                                                                            .width *
+                                                                    fontSize: context
+                                                                            .w *
                                                                         fourteen,
                                                                     fontWeight:
                                                                         FontWeight
@@ -171,9 +158,9 @@ class _FaqState extends State<Faq> {
                                                               child:
                                                                   Image.asset(
                                                                 'assets/images/chevron-down.png',
-                                                                width: media
-                                                                        .width *
-                                                                    0.075,
+                                                                width:
+                                                                    context.w *
+                                                                        0.075,
                                                               ))
                                                         ],
                                                       ),
@@ -186,15 +173,15 @@ class _FaqState extends State<Faq> {
                                                                 i)
                                                             ? Container(
                                                                 padding: EdgeInsets.only(
-                                                                    top: media
-                                                                            .width *
+                                                                    top: context
+                                                                            .w *
                                                                         0.025),
                                                                 child: Text(
                                                                   faqData[i][
                                                                       'answer'],
                                                                   style: GoogleFonts.roboto(
                                                                       fontSize:
-                                                                          media.width *
+                                                                          context.w *
                                                                               twelve,
                                                                       color:
                                                                           textColor),
@@ -214,7 +201,7 @@ class _FaqState extends State<Faq> {
                                         languages[choosenLanguage]
                                             ['text_noDataFound'],
                                         style: GoogleFonts.roboto(
-                                            fontSize: media.width * eighteen,
+                                            fontSize: context.w * eighteen,
                                             fontWeight: FontWeight.w600,
                                             color: textColor),
                                       )

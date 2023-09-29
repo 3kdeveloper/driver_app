@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/noInternet/nointernet.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class Favorite extends StatefulWidget {
   const Favorite({Key? key}) : super(key: key);
@@ -20,7 +13,6 @@ class _FavoriteState extends State<Favorite> {
   dynamic _deletingId;
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.of(context).size;
     return Material(
       child: ValueListenableBuilder(
           valueListenable: valueNotifierBook.value,
@@ -32,10 +24,10 @@ class _FavoriteState extends State<Favorite> {
               child: Stack(
                 children: [
                   Container(
-                    padding: EdgeInsets.fromLTRB(media.width * 0.05,
-                        media.width * 0.05, media.width * 0.05, 0),
-                    height: media.height * 1,
-                    width: media.width * 1,
+                    padding: EdgeInsets.fromLTRB(context.w * 0.05,
+                        context.w * 0.05, context.w * 0.05, 0),
+                    height: context.h * 1,
+                    width: context.w * 1,
                     color: page,
                     child: Column(
                       children: [
@@ -44,13 +36,13 @@ class _FavoriteState extends State<Favorite> {
                           children: [
                             Container(
                               padding:
-                                  EdgeInsets.only(bottom: media.width * 0.05),
-                              width: media.width * 1,
+                                  EdgeInsets.only(bottom: context.w * 0.05),
+                              width: context.w * 1,
                               alignment: Alignment.center,
                               child: Text(
                                 languages[choosenLanguage]['text_favourites'],
                                 style: GoogleFonts.roboto(
-                                    fontSize: media.width * twenty,
+                                    fontSize: context.w * twenty,
                                     fontWeight: FontWeight.w600,
                                     color: textColor),
                               ),
@@ -64,18 +56,18 @@ class _FavoriteState extends State<Favorite> {
                           ],
                         ),
                         SizedBox(
-                          height: media.width * 0.05,
+                          height: context.w * 0.05,
                         ),
                         SizedBox(
-                          width: media.width * 0.9,
-                          height: media.height * 0.16,
+                          width: context.w * 0.9,
+                          height: context.h * 0.16,
                           child: Image.asset(
                             'assets/images/favourites_bg.jpg',
                             fit: BoxFit.contain,
                           ),
                         ),
                         SizedBox(
-                          height: media.width * 0.1,
+                          height: context.w * 0.1,
                         ),
                         (favAddress.isNotEmpty)
                             ? Expanded(
@@ -88,10 +80,10 @@ class _FavoriteState extends State<Favorite> {
                                           return MapEntry(
                                             i,
                                             Container(
-                                              width: media.width * 0.9,
+                                              width: context.w * 0.9,
                                               padding: EdgeInsets.only(
-                                                  top: media.width * 0.03,
-                                                  bottom: media.width * 0.03),
+                                                  top: context.w * 0.03,
+                                                  bottom: context.w * 0.03),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -100,14 +92,14 @@ class _FavoriteState extends State<Favorite> {
                                                     favAddress[i]
                                                         ['address_name'],
                                                     style: GoogleFonts.roboto(
-                                                        fontSize: media.width *
-                                                            sixteen,
+                                                        fontSize:
+                                                            context.w * sixteen,
                                                         color: textColor,
                                                         fontWeight:
                                                             FontWeight.w600),
                                                   ),
                                                   SizedBox(
-                                                    height: media.width * 0.03,
+                                                    height: context.w * 0.03,
                                                   ),
                                                   Row(
                                                     mainAxisAlignment:
@@ -120,9 +112,8 @@ class _FavoriteState extends State<Favorite> {
                                                               'assets/images/home.png',
                                                               color:
                                                                   Colors.black,
-                                                              width:
-                                                                  media.width *
-                                                                      0.075,
+                                                              width: context.w *
+                                                                  0.075,
                                                             )
                                                           : (favAddress[i][
                                                                       'address_name'] ==
@@ -131,32 +122,30 @@ class _FavoriteState extends State<Favorite> {
                                                                   'assets/images/briefcase.png',
                                                                   color: Colors
                                                                       .black,
-                                                                  width: media
-                                                                          .width *
+                                                                  width: context
+                                                                          .w *
                                                                       0.075,
                                                                 )
                                                               : Image.asset(
                                                                   'assets/images/navigation.png',
                                                                   color: Colors
                                                                       .black,
-                                                                  width: media
-                                                                          .width *
+                                                                  width: context
+                                                                          .w *
                                                                       0.075,
                                                                 ),
                                                       SizedBox(
-                                                        width:
-                                                            media.width * 0.02,
+                                                        width: context.w * 0.02,
                                                       ),
                                                       SizedBox(
-                                                        width:
-                                                            media.width * 0.6,
+                                                        width: context.w * 0.6,
                                                         child: Text(
                                                           favAddress[i]
                                                               ['pick_address'],
                                                           style: GoogleFonts
                                                               .roboto(
                                                             fontSize:
-                                                                media.width *
+                                                                context.w *
                                                                     twelve,
                                                             color: textColor,
                                                           ),
@@ -200,7 +189,7 @@ class _FavoriteState extends State<Favorite> {
                             : Text(
                                 languages[choosenLanguage]['text_noDataFound'],
                                 style: GoogleFonts.roboto(
-                                    fontSize: media.width * eighteen,
+                                    fontSize: context.w * eighteen,
                                     fontWeight: FontWeight.w600,
                                     color: textColor),
                               )
@@ -212,20 +201,20 @@ class _FavoriteState extends State<Favorite> {
                   (_deletingAddress == true)
                       ? Positioned(
                           child: Container(
-                          height: media.height * 1,
-                          width: media.width * 1,
+                          height: context.h * 1,
+                          width: context.w * 1,
                           color: Colors.transparent.withOpacity(0.6),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: media.width * 0.9,
+                                width: context.w * 0.9,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Container(
-                                        height: media.height * 0.1,
-                                        width: media.width * 0.1,
+                                        height: context.h * 0.1,
+                                        width: context.w * 0.1,
                                         decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                             color: page),
@@ -241,8 +230,8 @@ class _FavoriteState extends State<Favorite> {
                                 ),
                               ),
                               Container(
-                                padding: EdgeInsets.all(media.width * 0.05),
-                                width: media.width * 0.9,
+                                padding: EdgeInsets.all(context.w * 0.05),
+                                width: context.w * 0.9,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(12),
                                     color: page),
@@ -253,12 +242,12 @@ class _FavoriteState extends State<Favorite> {
                                           ['text_removeFav'],
                                       textAlign: TextAlign.center,
                                       style: GoogleFonts.roboto(
-                                          fontSize: media.width * sixteen,
+                                          fontSize: context.w * sixteen,
                                           color: textColor,
                                           fontWeight: FontWeight.w600),
                                     ),
                                     SizedBox(
-                                      height: media.width * 0.05,
+                                      height: context.w * 0.05,
                                     ),
                                     Button(
                                         onTap: () async {

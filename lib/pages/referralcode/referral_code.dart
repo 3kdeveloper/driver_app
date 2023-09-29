@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:awii/functions/functions.dart';
-import 'package:awii/pages/loadingPage/loading.dart';
-import 'package:awii/pages/onTripPage/map_page.dart';
-import 'package:awii/styles/styles.dart';
-import 'package:awii/translations/translation.dart';
-import 'package:awii/widgets/widgets.dart';
+import 'package:awii/core/constants/exports.dart';
 
 class Referral extends StatefulWidget {
   const Referral({Key? key}) : super(key: key);
@@ -91,19 +84,15 @@ class _ReferralState extends State<Referral> {
                                 color: Colors.red),
                           ),
                         )
-                      : Container(),
-                  const SizedBox(
-                    height: 40,
-                  ),
+                      : const SizedBox.shrink(),
+                  const SizedBox(height: 40),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       //skip
                       Button(
                           onTap: () async {
-                            setState(() {
-                              _loading = true;
-                            });
+                            setState(() => _loading = true);
                             // var val = await registerUser();
                             FocusManager.instance.primaryFocus?.unfocus();
                             _error = '';
@@ -149,9 +138,7 @@ class _ReferralState extends State<Referral> {
                             //         ['text_somethingwentwrong'];
                             //   });
                             // }
-                            setState(() {
-                              _loading = false;
-                            });
+                            setState(() => _loading = false);
                           } else {}
                         },
                         text: languages[choosenLanguage]['text_apply'],
@@ -167,7 +154,7 @@ class _ReferralState extends State<Referral> {
             //loader
             (_loading == true)
                 ? const Positioned(top: 0, child: Loading())
-                : Container()
+                : const SizedBox.shrink()
           ],
         ),
       ),
